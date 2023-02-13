@@ -1,0 +1,8 @@
+no_comments: true
+package: res
+
+groups:
+  - path: assets/png
+    class_name: AppImages
+    package: res
+    types: [ .jpg, .png, .webp]
