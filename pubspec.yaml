@@ -47,6 +47,8 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^2.0.0
+  cupertino_icons: ^1.0.2
+  flutter_svg: ^1.1.6
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -58,6 +60,20 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+
+  fonts:
+    - family: GoogleSans
+      fonts:
+        - asset: assets/font/GoogleSans-Bold.ttf
+        - asset: assets/font/GoogleSans-BoldItalic.ttf
+          style: italic
+        - asset: assets/font/GoogleSans-Italic.ttf
+          style: italic
+        - asset: assets/font/GoogleSans-Medium.ttf
+        - asset: assets/font/GoogleSans-MediumItalic.ttf
+          style: italic
+        - asset: assets/font/GoogleSans-regular.ttf
+          style: normal
 
   # To add assets to your application, add an assets section, like this:
   # assets:

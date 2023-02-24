@@ -6,3 +6,7 @@ groups:
     class_name: AppImages
     package: res
     types: [ .jpg, .png, .webp]
+  - path: assets/icon
+    class_name: AppVactorialImages
+    package: res
+    types: [.svg]
