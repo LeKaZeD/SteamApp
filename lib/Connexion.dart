@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:steam_app/AppColors.dart';
 
 class Connexion extends StatefulWidget {
   const Connexion({super.key, required this.title});
@@ -13,7 +14,9 @@ class _ConnexionPageState extends State<Connexion> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
+      backgroundColor: AppColors.background,
+      body: Container(
+        margin: const EdgeInsets.only(left: 20, right: 20),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
@@ -25,7 +28,8 @@ class _ConnexionPageState extends State<Connexion> {
                   style: TextStyle(
                       fontFamily: 'GoogleSans',
                       fontWeight: FontWeight.bold,
-                      fontSize: 30),
+                      fontSize: 30,
+                      color: AppColors.white),
                 ),
               ],
             ),
@@ -39,7 +43,8 @@ class _ConnexionPageState extends State<Connexion> {
                       style: TextStyle(
                           fontFamily: 'Proxima',
                           fontWeight: FontWeight.normal,
-                          fontSize: 15),
+                          fontSize: 15,
+                          color: AppColors.white),
                     )),
               ],
             ),
