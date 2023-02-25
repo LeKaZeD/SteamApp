@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:steam_app/Connexion.dart';
 
 import 'HomePage.dart';
 
@@ -27,7 +28,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         fontFamily: 'GoogleSans',
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const Connexion(title: 'Flutter Demo Home Page'),
     );
   }
 }

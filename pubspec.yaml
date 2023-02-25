@@ -74,6 +74,9 @@ flutter:
           style: italic
         - asset: assets/font/GoogleSans-regular.ttf
           style: normal
+    - family: Proxima
+      fonts:
+        - asset: assets/font/Proxima Nova Font.otf
 
   # To add assets to your application, add an assets section, like this:
   # assets:
