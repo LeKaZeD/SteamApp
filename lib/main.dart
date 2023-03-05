@@ -29,7 +29,29 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         fontFamily: 'GoogleSans',
       ),
-      home: const Connexion(title: 'Flutter Demo Home Page'),
+      onGenerateRoute: (settings) {
+        switch (settings.name) {
+          case "/home":
+            return MaterialPageRoute(
+                builder: (context) => const MyHomePage(
+                      title: 'App',
+                    ));
+          case "/login":
+            return MaterialPageRoute(
+                builder: (context) => const Connexion(
+                      title: 'login',
+                    ));
+          case "/settings":
+          //return MaterialPageRoute(builder: (context) => const Settings());
+          case "/help":
+          //return MaterialPageRoute(builder: (context) => const Help());
+          default:
+            return MaterialPageRoute(
+                builder: (context) => const MyHomePage(
+                      title: 'App',
+                    ));
+        }
+      },
     );
   }
 }
