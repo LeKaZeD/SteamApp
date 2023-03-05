@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:steam_app/Connexion.dart';
+import 'package:steam_app/Screen/Connexion.dart';
 
-import 'HomePage.dart';
+import 'Screen/HomePage.dart';
 
 void main() {
   runApp(const MyApp());
