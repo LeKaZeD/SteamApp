@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:steam_app/Screen/Connexion.dart';
 
 import 'Screen/HomePage.dart';
+import 'Screen/Inscription.dart';
 
 void main() {
   runApp(const MyApp());
@@ -38,8 +39,13 @@ class MyApp extends StatelessWidget {
                     ));
           case "/login":
             return MaterialPageRoute(
-                builder: (context) => const Connexion(
+                builder: (context) => Connexion(
                       title: 'login',
+                    ));
+          case "/inscription":
+            return MaterialPageRoute(
+                builder: (context) => Inscription(
+                      title: 'inscription',
                     ));
           case "/settings":
           //return MaterialPageRoute(builder: (context) => const Settings());
@@ -47,7 +53,7 @@ class MyApp extends StatelessWidget {
           //return MaterialPageRoute(builder: (context) => const Help());
           default:
             return MaterialPageRoute(
-                builder: (context) => const MyHomePage(
+                builder: (context) => Connexion(
                       title: 'App',
                     ));
         }

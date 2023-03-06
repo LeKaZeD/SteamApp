@@ -1,37 +1,33 @@
 import 'package:flutter/material.dart';
-import 'package:steam_app/AppColors.dart';
-import 'package:steam_app/Screen/Component/Button.dart';
-import 'package:steam_app/Screen/Component/Input.dart';
-import 'package:steam_app/Screen/HomePage.dart';
 
-class Connexion extends StatefulWidget {
-  Connexion({super.key, required this.title});
+import '../AppColors.dart';
+import 'Component/Button.dart';
+import 'Component/Input.dart';
+
+class Inscription extends StatefulWidget {
+  Inscription({super.key, required this.title});
 
   final String title;
-  final EmailController = TextEditingController();
+  final usernameController = TextEditingController();
+  final emailController = TextEditingController();
   final passwordController = TextEditingController();
+  final passwordConfirmController = TextEditingController();
 
   @override
-  State<Connexion> createState() => _ConnexionPageState();
+  State<Inscription> createState() => _InscriptionPageState();
 }
 
-class _ConnexionPageState extends State<Connexion> {
-  void inscription() {
-    Navigator.of(context).pushNamed("/inscription");
-  }
-
-  void login() {
-    Navigator.of(context).pushNamed("/home");
-  }
+class _InscriptionPageState extends State<Inscription> {
+  void Inscription() {}
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.background,
       appBar: AppBar(
         elevation: 0,
         backgroundColor: AppColors.background,
       ),
+      backgroundColor: AppColors.background,
       body: Container(
         alignment: Alignment.topCenter,
         margin: const EdgeInsets.only(left: 20, right: 20),
@@ -39,11 +35,11 @@ class _ConnexionPageState extends State<Connexion> {
           width: 330,
           child: Form(
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
               mainAxisSize: MainAxisSize.min,
               children: [
                 const Text(
-                  'Bienvenue !',
+                  'Inscription',
                   style: TextStyle(
                       fontFamily: 'GoogleSans',
                       fontWeight: FontWeight.bold,
@@ -55,7 +51,7 @@ class _ConnexionPageState extends State<Connexion> {
                 const Flexible(
                     flex: 1,
                     child: Text(
-                      'Veuillez vous connecter ou créer un nouveau compte pour utiliser l\'application',
+                      'Veuillez saisir ces différentes informations, afin que vos listes soient sauvegardées.',
                       style: TextStyle(
                           fontFamily: 'Proxima',
                           fontWeight: FontWeight.normal,
@@ -65,7 +61,12 @@ class _ConnexionPageState extends State<Connexion> {
                     )),
                 const SizedBox(height: 20),
                 MyTextField(
-                    controler: widget.EmailController,
+                    controler: widget.usernameController,
+                    hintText: "Nom d'utilisateur",
+                    obscureText: false),
+                const SizedBox(height: 10),
+                MyTextField(
+                    controler: widget.emailController,
                     hintText: "E-mail",
                     obscureText: false),
                 const SizedBox(height: 10),
@@ -73,15 +74,24 @@ class _ConnexionPageState extends State<Connexion> {
                     controler: widget.passwordController,
                     hintText: "Mot de passe",
                     obscureText: true),
-                const SizedBox(height: 100),
-                Button(onTap: login, name: "Se connecter"),
                 const SizedBox(height: 10),
-                ButtonGost(onTap: inscription, name: "Créer un nouveau compte")
+                MyTextField(
+                    controler: widget.passwordConfirmController,
+                    hintText: "Vérification du mot de passe",
+                    obscureText: true),
+                Container(
+                  constraints: const BoxConstraints(
+                    minHeight: 10,
+                    maxHeight: 50,
+                  ),
+                ),
+                Button(onTap: Inscription, name: "S’inscrire"),
               ],
             ),
           ),
         ),
       ),
     );
+    throw UnimplementedError();
   }
 }
