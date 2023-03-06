@@ -61,6 +61,17 @@ flutter:
   # the material Icons class.
   uses-material-design: true
 
+  assets:
+    - assets/icon/back.svg
+    - assets/icon/close.svg
+    - assets/icon/empty_likes.svg
+    - assets/icon/empty_whishlist.svg
+    - assets/icon/like.svg
+    - assets/icon/like_full.svg
+    - assets/icon/warning.svg
+    - assets/icon/whishlist.svg
+    - assets/icon/whishlist_full.svg
+
   fonts:
     - family: GoogleSans
       fonts:
