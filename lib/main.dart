@@ -47,8 +47,10 @@ class MyApp extends StatelessWidget {
                 builder: (context) => Inscription(
                       title: 'inscription',
                     ));
-          case "/settings":
-          //return MaterialPageRoute(builder: (context) => const Settings());
+          case "/whishlist":
+          //return MaterialPageRoute(builder: (context) => whishlist());
+          case "/like":
+          //return MaterialPageRoute(builder: (context) => const like());
           case "/help":
           //return MaterialPageRoute(builder: (context) => const Help());
           default:

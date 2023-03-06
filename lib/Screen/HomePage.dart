@@ -41,6 +41,14 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    void Like() {
+      Navigator.of(context).pushNamed("/like");
+    }
+
+    void WhishList() {
+      Navigator.of(context).pushNamed("/whishlist");
+    }
+
     // This method is rerun every time setState is called, for instance as done
     // by the _incrementCounter method above.
     //
@@ -56,26 +64,17 @@ class _MyHomePageState extends State<MyHomePage> {
         automaticallyImplyLeading: false,
         actions: <Widget>[
           IconButton(
-              onPressed: null, icon: SvgPicture.asset(AppVactorialImages.like)),
+              onPressed: Like, icon: SvgPicture.asset(AppVactorialImages.like)),
           IconButton(
-              onPressed: null,
+              onPressed: WhishList,
               icon: SvgPicture.asset(AppVactorialImages.whishlist))
         ],
         //leading: Container(),
       ),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-            SvgPicture.asset(AppVactorialImages.like),
-          ],
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: <Widget>[],
         ),
       ),
       floatingActionButton: FloatingActionButton(
