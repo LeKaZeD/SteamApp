@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:steam_app/Screen/Connexion.dart';
+import 'package:steam_app/Screen/LikesvidesWidget.dart';
 
 import 'Screen/HomePage.dart';
 import 'Screen/Inscription.dart';
@@ -50,7 +51,12 @@ class MyApp extends StatelessWidget {
           case "/whishlist":
           //return MaterialPageRoute(builder: (context) => whishlist());
           case "/like":
-          //return MaterialPageRoute(builder: (context) => const like());
+            //return MaterialPageRoute(builder: (context) => const LikesvidesWidget());
+            return MaterialPageRoute(
+              builder: (context) => const LikesvidesWidget(
+                title: 'Mes Likes',
+              ));
+
           case "/help":
           //return MaterialPageRoute(builder: (context) => const Help());
           default:
