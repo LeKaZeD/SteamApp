@@ -49,6 +49,7 @@ dev_dependencies:
   flutter_lints: ^2.0.0
   cupertino_icons: ^1.0.2
   flutter_svg: ^1.1.6
+  http: ^0.13.5
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -71,6 +72,7 @@ flutter:
     - assets/icon/warning.svg
     - assets/icon/whishlist.svg
     - assets/icon/whishlist_full.svg
+    - assets/png/Jacket.jpg
 
   fonts:
     - family: GoogleSans

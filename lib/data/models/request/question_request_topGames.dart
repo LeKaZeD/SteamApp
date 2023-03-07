@@ -1,0 +1,3 @@
+class RequestTopGame {
+  const RequestTopGame();
+}

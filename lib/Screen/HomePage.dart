@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:steam_app/AppColors.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:steam_app/widget/Game_widget.dart';
 
 import '../res/app_images.dart';
 import '../res/app_vactorial_images.dart';
@@ -56,36 +57,24 @@ class _MyHomePageState extends State<MyHomePage> {
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
     return Scaffold(
-      appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: const Text("Accueil"),
-        backgroundColor: AppColors.background,
-        automaticallyImplyLeading: false,
-        actions: <Widget>[
-          IconButton(
-              onPressed: Like, icon: SvgPicture.asset(AppVactorialImages.like)),
-          IconButton(
-              onPressed: WhishList,
-              icon: SvgPicture.asset(AppVactorialImages.whishlist))
-        ],
-        //leading: Container(),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>[],
+        appBar: AppBar(
+          // Here we take the value from the MyHomePage object that was created by
+          // the App.build method, and use it to set our appbar title.
+          title: const Text("Accueil"),
+          backgroundColor: AppColors.background,
+          automaticallyImplyLeading: false,
+          actions: <Widget>[
+            IconButton(
+                onPressed: Like,
+                icon: SvgPicture.asset(AppVactorialImages.like)),
+            IconButton(
+                onPressed: WhishList,
+                icon: SvgPicture.asset(AppVactorialImages.whishlist))
+          ],
+          //leading: Container(),
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: SvgPicture.asset(
-          AppVactorialImages.emptyLikes,
-          color: AppColors.white,
-          semanticsLabel: 'ACME',
-        ),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
-    );
+        body: ListView(
+          children: <Widget>[Text("test"), Text("data"), Gamewidget()],
+        ));
   }
 }
