@@ -1,15 +1,19 @@
 class RequestGameDescription {
+  //creation d'une requette argument
   final int appid;
-  final String language = 'french';
+  static const String language = 'french';
 
-  const RequestGameDescription({required this.appid});
+  const RequestGameDescription(
+      {required this.appid}); // instencier l'id de l'app steam
 
   Map<String, dynamic> toMap() {
-    final querryParameters = {
-      'l': language,
-      'appid': appid
-    };
+    //argument appler pour la requette
+    final querryParameters = {'l': language, 'appid': appid};
     return querryParameters;
   }
 
+  String get GameID {
+    //recuperer l'id pour le json
+    return "$appid";
+  }
 }

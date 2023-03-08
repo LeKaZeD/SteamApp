@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:steam_app/data/api/remote_api_Steam.dart';
 
 import '../AppColors.dart';
 
@@ -24,7 +25,7 @@ class Gamewidget extends StatelessWidget {
             children: const [
               Text("Hogwards legacy"),
               Text("Nom editeur"),
-              Text("prix")
+              Text("")
             ],
           ),
           ElevatedButton(

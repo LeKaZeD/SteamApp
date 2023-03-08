@@ -20,13 +20,15 @@ class gameDescription {
 
   factory gameDescription.fromMap(Map<String, dynamic> map) {
     return gameDescription(
-        name: map['appid']['data']['name'] ?? '',
-        appid: map['appid']['data']['steam_appid'] ?? '',
-        description: map['appid']['data']['short_description'] ?? '',
-        publisher: map['appid']['data']['publishers'] ?? '',
-        is_free: map['appid']['data']['is_free'] ?? '',
-        imgURL: map['appid']['data']['header_image'] ?? '',
-        prix: map['appid']['data']['price_overview']['final_formatted'] ?? '');
+        name: map['name'] ?? '',
+        appid: map['steam_appid'] ?? 0,
+        description: map['short_description'] ?? '',
+        publisher: map['publishers'] ?? '',
+        is_free: map['is_free'] ?? false,
+        imgURL: map['header_image'] ?? '',
+        prix: map['is_free'] == true
+            ? map['price_overview']['final_formatted']
+            : "free");
   }
 
   gameDescriptionQuestion toEntity() {
