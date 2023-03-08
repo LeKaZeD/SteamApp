@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:steam_app/AppColors.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:steam_app/data/api/remote_api_Steam.dart';
+import 'package:steam_app/data/models/response/topgames.dart';
 import 'package:steam_app/widget/Game_widget.dart';
 
 import '../res/app_images.dart';
@@ -74,7 +76,31 @@ class _MyHomePageState extends State<MyHomePage> {
           //leading: Container(),
         ),
         body: ListView(
-          children: <Widget>[Text("test"), Text("data"), Gamewidget()],
+          children: <Widget>[
+            Text("test"),
+            Text("data"),
+            Gamewidget(
+                name: "test", editeur: "test", prix: "test", img: "nope"),
+            FutureBuilder<List<topGame>>(
+              future: RemoteAPISteam().getTopGame(),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  return ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: snapshot.data!.length,
+                      itemBuilder: (context, index) {
+                        return Gamewidget(
+                            name: snapshot.data![index].rank.toString(),
+                            editeur: "editeur",
+                            prix: "prix",
+                            img: "img");
+                      });
+                } else {
+                  return Text("c'est complex gros");
+                }
+              },
+            )
+          ],
         ));
   }
 }

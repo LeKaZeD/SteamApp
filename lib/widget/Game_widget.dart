@@ -4,7 +4,17 @@ import 'package:steam_app/data/api/remote_api_Steam.dart';
 import '../AppColors.dart';
 
 class Gamewidget extends StatelessWidget {
-  Gamewidget({super.key});
+  final String name;
+  final String editeur;
+  final String prix;
+  final String img;
+
+  Gamewidget(
+      {super.key,
+      required this.name,
+      required this.editeur,
+      required this.prix,
+      required this.img});
 
   @override
   Widget build(BuildContext context) {
@@ -22,11 +32,7 @@ class Gamewidget extends StatelessWidget {
                 width: 60,
               )),
           Column(
-            children: const [
-              Text("Hogwards legacy"),
-              Text("Nom editeur"),
-              Text("")
-            ],
+            children: [Text(name), Text(editeur), Text(prix)],
           ),
           ElevatedButton(
             onPressed: () {},
