@@ -8,7 +8,7 @@ class RequestGameDescription {
 
   Map<String, dynamic> toMap() {
     //argument appler pour la requette
-    final querryParameters = {'l': language, 'appid': appid};
+    final querryParameters = {'l': language, 'appids': "$appid"};
     return querryParameters;
   }
 

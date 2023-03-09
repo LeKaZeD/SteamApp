@@ -32,7 +32,7 @@ class RemoteAPISteam {
     return [];
   }
 
-  Future<Object> getGame(RequestGameDescription request) async {
+  Future<gameDescription> getGame(RequestGameDescription request) async {
     //recupere la data d'un jeu
     try {
       final response = await http.get(Uri.http('store.steampowered.com',
@@ -40,19 +40,44 @@ class RemoteAPISteam {
       if (response.statusCode == 200) {
         // si valide (code 200)
         final responseData = json.decode(response.body); //conversion en json
-        final gameId = request.GameID;
-        final result = List<Map<String, dynamic>>.from(responseData[gameId]
-            ['data']); //recuperation d'un tableau cle valeur
+        final String gameId = request.GameID;
+        final result =
+            responseData[gameId]['data']; //recuperation d'un tableau cle valeur
         if (result.isNotEmpty) {
-          return result.map((e) =>
-              gameDescription.fromMap(e)); //creation d'un objet GameDescription
+          var prix = "free";
+          try {
+            if (result['is_free'] == false) {
+              if (result['price_overview'] != null) {
+                if (result['price_overview']['final_formatted'] != null) {
+                  prix = result['price_overview']['final_formatted'];
+                } else {
+                  prix = "free";
+                }
+              } else {
+                prix = "14,99€";
+              }
+            } else {
+              prix = "free";
+            }
+          } catch (err) {}
+
+          return gameDescription(
+              name: result['name'],
+              appid: result['steam_appid'],
+              description: result['short_description'],
+              publisher: result['publishers'],
+              is_free: result['is_free'],
+              imgURL: result['header_image'],
+              prix: prix); //creation d'un objet GameDescription
         }
+      } else {
+        print(response.statusCode);
       }
     } catch (err) {
       print(err);
     }
     return gameDescription(
-        name: "",
+        name: "pas",
         appid: 0,
         description: "",
         publisher: [],

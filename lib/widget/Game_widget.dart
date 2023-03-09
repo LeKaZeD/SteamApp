@@ -18,37 +18,70 @@ class Gamewidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      margin: const EdgeInsets.all(8),
-      elevation: 5,
-      child: Row(
-        children: [
-          Padding(
-              padding: const EdgeInsets.all(8),
-              child: Image.network(
-                'https://m.media-amazon.com/images/I/51NnxrCKFhL._SX387_BO1,204,203,200_.jpg',
-                fit: BoxFit.cover,
-                height: 90,
-                width: 60,
-              )),
-          Column(
-            children: [Text(name), Text(editeur), Text(prix)],
-          ),
-          ElevatedButton(
-            onPressed: () {},
-            style: ElevatedButton.styleFrom(
-              backgroundColor: AppColors.primary,
-            ),
-            child: const Text(
-              "En savoir plus",
-              style: TextStyle(
-                color: AppColors.white,
-              ),
+    return name != "pas"
+        ? Card(
+            color: AppColors.input,
+            margin: const EdgeInsets.all(8),
+            elevation: 5,
+            child: Row(
+              children: [
+                Padding(
+                    padding: const EdgeInsets.all(8),
+                    child: Image.network(
+                      img,
+                      fit: BoxFit.cover,
+                      height: 100,
+                      width: 70,
+                    )),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      width: 200,
+                      child: Text(name,
+                          textAlign: TextAlign.left,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(color: AppColors.white)),
+                    ),
+                    Text(
+                      editeur,
+                      textAlign: TextAlign.left,
+                      style: TextStyle(color: AppColors.white, fontSize: 12),
+                    ),
+                    const SizedBox(height: 10),
+                    Text("Prix : $prix",
+                        textAlign: TextAlign.left,
+                        style: TextStyle(color: AppColors.white))
+                  ],
+                ),
+                Spacer(),
+                ElevatedButton(
+                  onPressed: () {},
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: AppColors.primary),
+                  child: Padding(
+                      padding: EdgeInsets.symmetric(vertical: 39.0),
+                      child: Column(
+                        children: const [
+                          Text(
+                            "En savoir",
+                            style: TextStyle(
+                              color: AppColors.white,
+                            ),
+                          ),
+                          Text(
+                            "plus",
+                            style: TextStyle(
+                              color: AppColors.white,
+                            ),
+                          ),
+                        ],
+                      )),
+                )
+              ],
             ),
           )
-        ],
-      ),
-    );
+        : Container();
     throw UnimplementedError();
   }
 }

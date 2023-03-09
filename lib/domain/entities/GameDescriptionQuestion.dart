@@ -2,7 +2,7 @@ class gameDescriptionQuestion {
   final String name;
   final int appid;
   final String description;
-  final List<String> publisher;
+  final List<dynamic> publisher;
   final bool is_free;
   final String imgURL;
   final String prix;

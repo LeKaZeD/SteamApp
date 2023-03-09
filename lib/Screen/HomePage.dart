@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:steam_app/AppColors.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:steam_app/data/api/remote_api_Steam.dart';
 import 'package:steam_app/data/models/response/topgames.dart';
+import 'package:steam_app/domain/entities/GameDescriptionQuestion.dart';
+import 'package:steam_app/domain/repo/TopGameRepo.dart';
 import 'package:steam_app/widget/Game_widget.dart';
 
 import '../res/app_images.dart';
 import '../res/app_vactorial_images.dart';
+
+import 'dart:convert';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title, this.logged});
@@ -29,29 +35,86 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  void Like() {
+    Navigator.of(context).pushNamed("/like");
+  }
 
-  void _incrementCounter() {
+  void WhishList() {
+    Navigator.of(context).pushNamed("/whishlist");
+  }
+
+  int _page = 0;
+
+  final int _limit = 20;
+
+  bool _isFirstLoadRunning = false;
+  bool _hasNextPage = true;
+
+  bool _isLoadMoreRunning = false;
+
+  List _posts = [];
+
+  void _loadMore() async {
+    if (_hasNextPage == true &&
+        _isFirstLoadRunning == false &&
+        _isLoadMoreRunning == false &&
+        _controller.position.extentAfter < 300) {
+      setState(() {
+        _isLoadMoreRunning = true; // Display a progress indicator at the bottom
+      });
+
+      _page += 1; // Increase _page by 1
+
+      if (_posts.length < 95) {
+        // mettre une condition pour afficher plus avec une limite de 100
+        final games = await TopGameRepo().getTopGame(_posts.length);
+        setState(() {
+          _posts.addAll(games);
+        });
+      } else {
+        setState(() {
+          _hasNextPage = false;
+        });
+      }
+
+      setState(() {
+        _isLoadMoreRunning = false;
+      });
+    }
+  }
+
+  void _firstLoad() async {
     setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
+      _isFirstLoadRunning = true;
     });
+
+    try {
+      //call the first game
+      final games = await TopGameRepo().getTopGame(0);
+      setState(() {
+        _posts = games;
+      });
+    } catch (err) {
+      print(err);
+    }
+
+    setState(() {
+      _isFirstLoadRunning = false;
+    });
+  }
+
+  late ScrollController _controller = ScrollController()
+    ..addListener(_loadMore);
+
+  @override
+  void initState() {
+    super.initState();
+    _firstLoad();
+    _controller = ScrollController()..addListener(_loadMore);
   }
 
   @override
   Widget build(BuildContext context) {
-    void Like() {
-      Navigator.of(context).pushNamed("/like");
-    }
-
-    void WhishList() {
-      Navigator.of(context).pushNamed("/whishlist");
-    }
-
     // This method is rerun every time setState is called, for instance as done
     // by the _incrementCounter method above.
     //
@@ -75,32 +138,41 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
           //leading: Container(),
         ),
-        body: ListView(
-          children: <Widget>[
-            Text("test"),
-            Text("data"),
-            Gamewidget(
-                name: "test", editeur: "test", prix: "test", img: "nope"),
-            FutureBuilder<List<topGame>>(
-              future: RemoteAPISteam().getTopGame(),
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  return ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: snapshot.data!.length,
-                      itemBuilder: (context, index) {
-                        return Gamewidget(
-                            name: snapshot.data![index].rank.toString(),
-                            editeur: "editeur",
-                            prix: "prix",
-                            img: "img");
-                      });
-                } else {
-                  return Text("c'est complex gros");
-                }
-              },
-            )
-          ],
+        body: Container(
+          color: AppColors.background,
+          child: Center(
+            child: Container(
+                width: 400,
+                child: _isFirstLoadRunning
+                    ? const Center(
+                        child: CircularProgressIndicator(),
+                      )
+                    : Column(
+                        children: [
+                          Expanded(
+                            child: ListView.builder(
+                              itemCount: _posts.length,
+                              controller: _controller,
+                              itemBuilder: (_, index) => Gamewidget(
+                                  name: _posts[index].name,
+                                  editeur: _posts[index].publisher.isNotEmpty
+                                      ? _posts[index].publisher[0]
+                                      : "",
+                                  prix: _posts[index].prix,
+                                  img: _posts[index].imgURL),
+                            ),
+                          ),
+                          if (_isLoadMoreRunning == true)
+                            const Padding(
+                              padding: EdgeInsets.only(top: 10, bottom: 40),
+                              child: Center(
+                                child: CircularProgressIndicator(),
+                              ),
+                            ),
+                          if (_hasNextPage == false) Container(),
+                        ],
+                      )),
+          ),
         ));
   }
 }
