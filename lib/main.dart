@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:steam_app/Screen/Connexion.dart';
+import 'package:steam_app/Screen/DetailJeu.dart';
 import 'package:steam_app/Screen/LikesvidesWidget.dart';
 import 'package:steam_app/Screen/WhishlistVide.dart';
 
@@ -59,8 +60,8 @@ class MyApp extends StatelessWidget {
           case "/like":
             //return MaterialPageRoute(builder: (context) => const LikesvidesWidget());
             return MaterialPageRoute(
-              builder: (context) => const LikesvidesWidget(
-                title: 'Mes Likes',
+              builder: (context) => const DetailJeu(
+                title: 'Détail du jeu',
               ));
 
           case "/help":

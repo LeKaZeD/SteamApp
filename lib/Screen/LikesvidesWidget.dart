@@ -14,12 +14,12 @@ class LikesvidesWidget extends StatefulWidget {
 }
 
 class _LikesvidesWidgetState extends State<LikesvidesWidget> {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.background,
       appBar: AppBar(
-        elevation: 0,
         backgroundColor: AppColors.background,
         title: Text("Mes Likes"),
       ),

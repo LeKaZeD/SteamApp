@@ -71,6 +71,7 @@ flutter:
     - assets/icon/warning.svg
     - assets/icon/whishlist.svg
     - assets/icon/whishlist_full.svg
+    - assets/png/share.jpg
 
   fonts:
     - family: GoogleSans
