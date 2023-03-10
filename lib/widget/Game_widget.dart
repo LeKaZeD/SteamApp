@@ -1,24 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:steam_app/data/api/remote_api_Steam.dart';
+import 'package:steam_app/domain/entities/GameDescriptionQuestion.dart';
 
 import '../AppColors.dart';
 
 class Gamewidget extends StatelessWidget {
-  final String name;
-  final String editeur;
-  final String prix;
-  final String img;
+  final gameDescriptionQuestion game;
+  final Function() onTap;
 
-  Gamewidget(
-      {super.key,
-      required this.name,
-      required this.editeur,
-      required this.prix,
-      required this.img});
+  Gamewidget({super.key, required this.game, required this.onTap});
+
+  void gameDescription() {}
 
   @override
   Widget build(BuildContext context) {
-    return name != "pas"
+    return game.name != "pas"
         ? Card(
             color: AppColors.input,
             margin: const EdgeInsets.all(8),
@@ -31,7 +27,7 @@ class Gamewidget extends StatelessWidget {
                   colorFilter: ColorFilter.mode(
                       Colors.black.withOpacity(0.05), BlendMode.dstATop),
                   image: NetworkImage(
-                    img,
+                    game.imgURL,
                   ),
                 ),
               ),
@@ -44,7 +40,7 @@ class Gamewidget extends StatelessWidget {
                             border: Border.all(
                                 width: 0.5, color: AppColors.placeholder)),
                         child: Image.network(
-                          img,
+                          game.imgURL,
                           fit: BoxFit.cover,
                           height: 100,
                           width: 70,
@@ -55,13 +51,13 @@ class Gamewidget extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(name,
+                        Text(game.name,
                             textAlign: TextAlign.left,
                             overflow: TextOverflow.ellipsis,
                             style: const TextStyle(color: AppColors.white)),
                         Container(
                           child: Text(
-                            editeur,
+                            game.publisher[0],
                             textAlign: TextAlign.left,
                             overflow: TextOverflow.ellipsis,
                             style: const TextStyle(
@@ -69,7 +65,7 @@ class Gamewidget extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(height: 10),
-                        Text("Prix : $prix",
+                        Text("Prix : " + game.prix,
                             textAlign: TextAlign.left,
                             style: TextStyle(color: AppColors.white))
                       ],
@@ -79,7 +75,7 @@ class Gamewidget extends StatelessWidget {
                   SizedBox(
                     width: 120,
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: onTap,
                       style: ElevatedButton.styleFrom(
                           backgroundColor: AppColors.primary),
                       child: Padding(

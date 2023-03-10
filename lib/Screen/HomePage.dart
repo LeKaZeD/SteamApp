@@ -4,6 +4,7 @@ import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:steam_app/AppColors.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:steam_app/Screen/Component/Input.dart';
+import 'package:steam_app/Screen/DetailJeu.dart';
 import 'package:steam_app/data/api/remote_api_Steam.dart';
 import 'package:steam_app/data/models/response/topgames.dart';
 import 'package:steam_app/domain/entities/GameDescriptionQuestion.dart';
@@ -43,6 +44,10 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void WhishList() {
     Navigator.of(context).pushNamed("/whishlist");
+  }
+
+  void gameDescription(gameDescriptionQuestion game) {
+    Navigator.of(context).pushNamed("/Detail", arguments: game);
   }
 
   int _page = 0;
@@ -313,13 +318,17 @@ class _MyHomePageState extends State<MyHomePage> {
                                       itemCount: _posts.length,
                                       controller: _controller,
                                       itemBuilder: (_, index) => Gamewidget(
-                                          name: _posts[index].name,
-                                          editeur:
-                                              _posts[index].publisher.isNotEmpty
-                                                  ? _posts[index].publisher[0]
-                                                  : "",
-                                          prix: _posts[index].prix,
-                                          img: _posts[index].imgURL),
+                                          game: _posts[index],
+                                          onTap: () {
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      DetailJeu(
+                                                          title: "title",
+                                                          game: _posts[index]),
+                                                ));
+                                          }),
                                     ),
                                   ),
                                   if (_isLoadMoreRunning == true)
