@@ -10,4 +10,5 @@ class AppVactorialImages {
   static const String warning = 'assets/icon/warning.svg';
   static const String whishlist = 'assets/icon/whishlist.svg';
   static const String whishlistFull = 'assets/icon/whishlist_full.svg';
+  static const String imgdetailjeu = 'assets/png/share.jpg';
 }

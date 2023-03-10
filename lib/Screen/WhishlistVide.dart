@@ -19,7 +19,6 @@ class _WhishlistVideState extends State<WhishlistVide> {
     return Scaffold(
       backgroundColor: AppColors.background,
       appBar: AppBar(
-        elevation: 0,
         backgroundColor: AppColors.background,
         title: Text("Ma liste de souhaits"),
       ),
