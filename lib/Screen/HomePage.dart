@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:steam_app/AppColors.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:steam_app/Screen/Component/Input.dart';
 import 'package:steam_app/data/api/remote_api_Steam.dart';
 import 'package:steam_app/data/models/response/topgames.dart';
 import 'package:steam_app/domain/entities/GameDescriptionQuestion.dart';
@@ -15,9 +16,10 @@ import '../res/app_vactorial_images.dart';
 import 'dart:convert';
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title, this.logged});
+  MyHomePage({super.key, required this.title, this.logged});
 
   final String? logged;
+  final search = TextEditingController();
 
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
@@ -140,38 +142,62 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
         body: Container(
           color: AppColors.background,
-          child: Center(
-            child: Container(
-                width: 400,
-                child: _isFirstLoadRunning
-                    ? const Center(
-                        child: CircularProgressIndicator(),
-                      )
-                    : Column(
-                        children: [
-                          Expanded(
-                            child: ListView.builder(
-                              itemCount: _posts.length,
-                              controller: _controller,
-                              itemBuilder: (_, index) => Gamewidget(
-                                  name: _posts[index].name,
-                                  editeur: _posts[index].publisher.isNotEmpty
-                                      ? _posts[index].publisher[0]
-                                      : "",
-                                  prix: _posts[index].prix,
-                                  img: _posts[index].imgURL),
-                            ),
-                          ),
-                          if (_isLoadMoreRunning == true)
-                            const Padding(
-                              padding: EdgeInsets.only(top: 10, bottom: 40),
-                              child: Center(
-                                child: CircularProgressIndicator(),
-                              ),
-                            ),
-                          if (_hasNextPage == false) Container(),
-                        ],
-                      )),
+          child: Column(
+            children: [
+              Container(
+                width: 380,
+                child: Form(
+                  child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        const SizedBox(height: 10),
+                        MyTextFieldResearch(
+                            controler: widget.search,
+                            hintText: "Rechercher un jeu...",
+                            obscureText: false),
+                        const SizedBox(height: 10),
+                      ]),
+                ),
+              ),
+              Expanded(
+                child: Center(
+                  child: Container(
+                      width: 400,
+                      child: _isFirstLoadRunning
+                          ? const Center(
+                              child: CircularProgressIndicator(),
+                            )
+                          : Column(
+                              children: [
+                                Expanded(
+                                  child: ListView.builder(
+                                    itemCount: _posts.length,
+                                    controller: _controller,
+                                    itemBuilder: (_, index) => Gamewidget(
+                                        name: _posts[index].name,
+                                        editeur:
+                                            _posts[index].publisher.isNotEmpty
+                                                ? _posts[index].publisher[0]
+                                                : "",
+                                        prix: _posts[index].prix,
+                                        img: _posts[index].imgURL),
+                                  ),
+                                ),
+                                if (_isLoadMoreRunning == true)
+                                  const Padding(
+                                    padding:
+                                        EdgeInsets.only(top: 10, bottom: 40),
+                                    child: Center(
+                                      child: CircularProgressIndicator(),
+                                    ),
+                                  ),
+                                if (_hasNextPage == false) Container(),
+                              ],
+                            )),
+                ),
+              ),
+            ],
           ),
         ));
   }
