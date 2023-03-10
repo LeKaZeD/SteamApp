@@ -161,143 +161,183 @@ class _MyHomePageState extends State<MyHomePage> {
                       ]),
                 ),
               ),
-              SizedBox(
-                height: 250,
-                child: _isFirstLoadRunning
-                    ? Container()
-                    : Card(
-                        color: AppColors.input,
-                        margin: const EdgeInsets.all(0),
-                        elevation: 5,
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: AppColors.input,
-                            image: DecorationImage(
-                              fit: BoxFit.cover,
-                              colorFilter: ColorFilter.mode(
-                                  Colors.black.withOpacity(1),
-                                  BlendMode.dstATop),
-                              image: NetworkImage(_posts[0].imgURL),
-                            ),
-                          ),
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              Expanded(
-                                flex: 100,
-                                child: Padding(
-                                  padding: const EdgeInsets.all(16.0),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(_posts[0].name,
-                                          textAlign: TextAlign.left,
-                                          overflow: TextOverflow.ellipsis,
-                                          style: const TextStyle(
-                                              color: AppColors.white,
-                                              fontSize: 19)),
-                                      const SizedBox(
-                                        height: 8,
-                                      ),
-                                      Container(
-                                        child: Text(
-                                          _posts[0].description,
-                                          textAlign: TextAlign.left,
-                                          overflow: TextOverflow.clip,
-                                          style: const TextStyle(
-                                              color: AppColors.white,
-                                              fontSize: 12),
+              _isFirstLoadRunning
+                  ? const Center(
+                      child: CircularProgressIndicator(),
+                    )
+                  : Expanded(
+                      child: Column(
+                        children: [
+                          SizedBox(
+                            height: 250,
+                            child: _isFirstLoadRunning
+                                ? Container()
+                                : Card(
+                                    color: AppColors.input,
+                                    margin: const EdgeInsets.all(0),
+                                    elevation: 5,
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        color: AppColors.input,
+                                        image: DecorationImage(
+                                          fit: BoxFit.cover,
+                                          colorFilter: ColorFilter.mode(
+                                              Colors.black.withOpacity(0.5),
+                                              BlendMode.dstATop),
+                                          image: NetworkImage(_posts[0].imgURL),
                                         ),
                                       ),
-                                      const SizedBox(
-                                        height: 8,
-                                      ),
-                                      SizedBox(
-                                        child: ElevatedButton(
-                                          onPressed: () {},
-                                          style: ElevatedButton.styleFrom(
-                                              backgroundColor:
-                                                  AppColors.primary),
-                                          child: Padding(
+                                      child: Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.end,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.end,
+                                        children: [
+                                          Expanded(
+                                            flex: 100,
+                                            child: Padding(
                                               padding:
-                                                  const EdgeInsets.symmetric(
-                                                      vertical: 5.0,
-                                                      horizontal: 5.0),
+                                                  const EdgeInsets.all(16.0),
                                               child: Column(
-                                                children: const [
-                                                  Text(
-                                                    "En savoir plus",
-                                                    style: TextStyle(
-                                                        color: AppColors.white,
-                                                        fontSize: 15),
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.end,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(_posts[0].name,
+                                                      textAlign: TextAlign.left,
+                                                      overflow:
+                                                          TextOverflow.ellipsis,
+                                                      style: const TextStyle(
+                                                          color:
+                                                              AppColors.white,
+                                                          fontSize: 19)),
+                                                  const SizedBox(
+                                                    height: 8,
+                                                  ),
+                                                  Container(
+                                                    child: Text(
+                                                      _posts[0].description,
+                                                      textAlign: TextAlign.left,
+                                                      overflow:
+                                                          TextOverflow.clip,
+                                                      style: const TextStyle(
+                                                          color:
+                                                              AppColors.white,
+                                                          fontSize: 12),
+                                                    ),
+                                                  ),
+                                                  const SizedBox(
+                                                    height: 8,
+                                                  ),
+                                                  SizedBox(
+                                                    child: ElevatedButton(
+                                                      onPressed: () {},
+                                                      style: ElevatedButton
+                                                          .styleFrom(
+                                                              backgroundColor:
+                                                                  AppColors
+                                                                      .primary),
+                                                      child: Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                      .symmetric(
+                                                                  vertical: 5.0,
+                                                                  horizontal:
+                                                                      5.0),
+                                                          child: Column(
+                                                            children: const [
+                                                              Text(
+                                                                "En savoir plus",
+                                                                style: TextStyle(
+                                                                    color: AppColors
+                                                                        .white,
+                                                                    fontSize:
+                                                                        15),
+                                                              ),
+                                                            ],
+                                                          )),
+                                                    ),
                                                   ),
                                                 ],
+                                              ),
+                                            ),
+                                          ),
+                                          Spacer(),
+                                          Padding(
+                                              padding: const EdgeInsets.all(16),
+                                              child: Container(
+                                                decoration: BoxDecoration(
+                                                    border: Border.all(
+                                                        width: 0.5,
+                                                        color: AppColors
+                                                            .placeholder)),
+                                                child: Image.network(
+                                                  _posts[0].imgURL,
+                                                  fit: BoxFit.cover,
+                                                  height: 150,
+                                                  width: 120,
+                                                ),
                                               )),
-                                        ),
+                                        ],
                                       ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              Spacer(),
-                              Padding(
-                                  padding: const EdgeInsets.all(16),
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                        border: Border.all(
-                                            width: 0.5,
-                                            color: AppColors.placeholder)),
-                                    child: Image.network(
-                                      _posts[0].imgURL,
-                                      fit: BoxFit.cover,
-                                      height: 150,
-                                      width: 120,
                                     ),
-                                  )),
+                                  ),
+                          ),
+                          const SizedBox(
+                            height: 8,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: const [
+                              Padding(
+                                padding: EdgeInsets.only(left: 8),
+                                child: Text("Les meilleurs ventes",
+                                    textAlign: TextAlign.left,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: TextStyle(
+                                        color: AppColors.white,
+                                        fontSize: 15,
+                                        decoration: TextDecoration.underline)),
+                              ),
                             ],
                           ),
-                        ),
-                      ),
-              ),
-              Expanded(
-                child: Center(
-                  child: SizedBox(
-                      child: _isFirstLoadRunning
-                          ? const Center(
-                              child: CircularProgressIndicator(),
-                            )
-                          : Column(
-                              children: [
-                                Expanded(
-                                  child: ListView.builder(
-                                    itemCount: _posts.length,
-                                    controller: _controller,
-                                    itemBuilder: (_, index) => Gamewidget(
-                                        name: _posts[index].name,
-                                        editeur:
-                                            _posts[index].publisher.isNotEmpty
-                                                ? _posts[index].publisher[0]
-                                                : "",
-                                        prix: _posts[index].prix,
-                                        img: _posts[index].imgURL),
-                                  ),
-                                ),
-                                if (_isLoadMoreRunning == true)
-                                  const Padding(
-                                    padding:
-                                        EdgeInsets.only(top: 10, bottom: 40),
-                                    child: Center(
-                                      child: CircularProgressIndicator(),
+                          Expanded(
+                            child: Center(
+                              child: SizedBox(
+                                  child: Column(
+                                children: [
+                                  Expanded(
+                                    child: ListView.builder(
+                                      itemCount: _posts.length,
+                                      controller: _controller,
+                                      itemBuilder: (_, index) => Gamewidget(
+                                          name: _posts[index].name,
+                                          editeur:
+                                              _posts[index].publisher.isNotEmpty
+                                                  ? _posts[index].publisher[0]
+                                                  : "",
+                                          prix: _posts[index].prix,
+                                          img: _posts[index].imgURL),
                                     ),
                                   ),
-                                if (_hasNextPage == false) Container(),
-                              ],
-                            )),
-                ),
-              ),
+                                  if (_isLoadMoreRunning == true)
+                                    const Padding(
+                                      padding:
+                                          EdgeInsets.only(top: 10, bottom: 40),
+                                      child: Center(
+                                        child: CircularProgressIndicator(),
+                                      ),
+                                    ),
+                                  if (_hasNextPage == false) Container(),
+                                ],
+                              )),
+                            ),
+                          ),
+                        ],
+                      ),
+                    )
             ],
           ),
         ));

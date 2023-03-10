@@ -89,14 +89,12 @@ class Gamewidget extends StatelessWidget {
                               Text(
                                 "En savoir",
                                 style: TextStyle(
-                                  color: AppColors.white,
-                                ),
+                                    color: AppColors.white, fontSize: 15),
                               ),
                               Text(
                                 "plus",
                                 style: TextStyle(
-                                  color: AppColors.white,
-                                ),
+                                    color: AppColors.white, fontSize: 15),
                               ),
                             ],
                           )),
