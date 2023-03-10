@@ -51,6 +51,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   bool _isFirstLoadRunning = false;
   bool _hasNextPage = true;
+  bool _isFirstcardLoad = false;
 
   bool _isLoadMoreRunning = false;
 
@@ -69,7 +70,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
       if (_posts.length < 95) {
         // mettre une condition pour afficher plus avec une limite de 100
-        final games = await TopGameRepo().getTopGame(_posts.length);
+        final games = await TopGameRepo().getTopGame(_posts.length, 5);
         setState(() {
           _posts.addAll(games);
         });
@@ -92,9 +93,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
     try {
       //call the first game
-      final games = await TopGameRepo().getTopGame(0);
+      final games = await TopGameRepo().getTopGame(0, 10);
       setState(() {
-        _posts = games;
+        _posts.addAll(games);
       });
     } catch (err) {
       print(err);
@@ -144,8 +145,8 @@ class _MyHomePageState extends State<MyHomePage> {
           color: AppColors.background,
           child: Column(
             children: [
-              Container(
-                width: 380,
+              Padding(
+                padding: EdgeInsets.all(8),
                 child: Form(
                   child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -160,10 +161,110 @@ class _MyHomePageState extends State<MyHomePage> {
                       ]),
                 ),
               ),
+              SizedBox(
+                height: 250,
+                child: _isFirstLoadRunning
+                    ? Container()
+                    : Card(
+                        color: AppColors.input,
+                        margin: const EdgeInsets.all(0),
+                        elevation: 5,
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: AppColors.input,
+                            image: DecorationImage(
+                              fit: BoxFit.cover,
+                              colorFilter: ColorFilter.mode(
+                                  Colors.black.withOpacity(1),
+                                  BlendMode.dstATop),
+                              image: NetworkImage(_posts[0].imgURL),
+                            ),
+                          ),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Expanded(
+                                flex: 100,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(16.0),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(_posts[0].name,
+                                          textAlign: TextAlign.left,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: const TextStyle(
+                                              color: AppColors.white,
+                                              fontSize: 19)),
+                                      const SizedBox(
+                                        height: 8,
+                                      ),
+                                      Container(
+                                        child: Text(
+                                          _posts[0].description,
+                                          textAlign: TextAlign.left,
+                                          overflow: TextOverflow.clip,
+                                          style: const TextStyle(
+                                              color: AppColors.white,
+                                              fontSize: 12),
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        height: 8,
+                                      ),
+                                      SizedBox(
+                                        child: ElevatedButton(
+                                          onPressed: () {},
+                                          style: ElevatedButton.styleFrom(
+                                              backgroundColor:
+                                                  AppColors.primary),
+                                          child: Padding(
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      vertical: 5.0,
+                                                      horizontal: 5.0),
+                                              child: Column(
+                                                children: const [
+                                                  Text(
+                                                    "En savoir plus",
+                                                    style: TextStyle(
+                                                        color: AppColors.white,
+                                                        fontSize: 15),
+                                                  ),
+                                                ],
+                                              )),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              Spacer(),
+                              Padding(
+                                  padding: const EdgeInsets.all(16),
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                        border: Border.all(
+                                            width: 0.5,
+                                            color: AppColors.placeholder)),
+                                    child: Image.network(
+                                      _posts[0].imgURL,
+                                      fit: BoxFit.cover,
+                                      height: 150,
+                                      width: 120,
+                                    ),
+                                  )),
+                            ],
+                          ),
+                        ),
+                      ),
+              ),
               Expanded(
                 child: Center(
-                  child: Container(
-                      width: 400,
+                  child: SizedBox(
                       child: _isFirstLoadRunning
                           ? const Center(
                               child: CircularProgressIndicator(),

@@ -50,31 +50,30 @@ class Gamewidget extends StatelessWidget {
                           width: 70,
                         ),
                       )),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        width: 170,
-                        child: Text(name,
+                  Expanded(
+                    flex: 100,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(name,
                             textAlign: TextAlign.left,
                             overflow: TextOverflow.ellipsis,
-                            style: TextStyle(color: AppColors.white)),
-                      ),
-                      Container(
-                        width: 170,
-                        child: Text(
-                          editeur,
-                          textAlign: TextAlign.left,
-                          overflow: TextOverflow.ellipsis,
-                          style:
-                              TextStyle(color: AppColors.white, fontSize: 12),
+                            style: const TextStyle(color: AppColors.white)),
+                        Container(
+                          child: Text(
+                            editeur,
+                            textAlign: TextAlign.left,
+                            overflow: TextOverflow.ellipsis,
+                            style: const TextStyle(
+                                color: AppColors.white, fontSize: 12),
+                          ),
                         ),
-                      ),
-                      const SizedBox(height: 10),
-                      Text("Prix : $prix",
-                          textAlign: TextAlign.left,
-                          style: TextStyle(color: AppColors.white))
-                    ],
+                        const SizedBox(height: 10),
+                        Text("Prix : $prix",
+                            textAlign: TextAlign.left,
+                            style: TextStyle(color: AppColors.white))
+                      ],
+                    ),
                   ),
                   Spacer(),
                   SizedBox(
