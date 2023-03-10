@@ -60,10 +60,15 @@ class Gamewidget extends StatelessWidget {
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(color: AppColors.white)),
                       ),
-                      Text(
-                        editeur,
-                        textAlign: TextAlign.left,
-                        style: TextStyle(color: AppColors.white, fontSize: 12),
+                      Container(
+                        width: 170,
+                        child: Text(
+                          editeur,
+                          textAlign: TextAlign.left,
+                          overflow: TextOverflow.ellipsis,
+                          style:
+                              TextStyle(color: AppColors.white, fontSize: 12),
+                        ),
                       ),
                       const SizedBox(height: 10),
                       Text("Prix : $prix",

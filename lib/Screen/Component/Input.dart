@@ -75,7 +75,7 @@ class MyTextFieldResearch extends StatelessWidget {
           filled: true,
           hintText: hintText,
           hintStyle: const TextStyle(color: AppColors.placeholder),
-          suffixIcon: Padding(
+          suffixIcon: const Padding(
             padding: EdgeInsets.only(top: 0), // add padding to adjust icon
             child: Icon(Icons.search_outlined, color: AppColors.primary),
           )),
