@@ -49,6 +49,5 @@ class ButtonGost extends StatelessWidget {
         ),
       ),
     );
-    throw UnimplementedError();
   }
 }

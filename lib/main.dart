@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:steam_app/Screen/Connexion.dart';
 import 'package:steam_app/Screen/DetailJeu.dart';
 import 'package:steam_app/Screen/LikesvidesWidget.dart';
+import 'package:steam_app/Screen/Search.dart';
 import 'package:steam_app/Screen/WhishlistVide.dart';
+import 'package:steam_app/domain/entities/GameDescriptionQuestion.dart';
 
 import 'Screen/HomePage.dart';
 import 'Screen/Inscription.dart';
@@ -37,7 +39,7 @@ class MyApp extends StatelessWidget {
         switch (settings.name) {
           case "/home":
             return MaterialPageRoute(
-                builder: (context) => const MyHomePage(
+                builder: (context) => MyHomePage(
                       title: 'App',
                     ));
           case "/login":
@@ -51,21 +53,26 @@ class MyApp extends StatelessWidget {
                       title: 'inscription',
                     ));
           case "/whishlist":
-          //return MaterialPageRoute(builder: (context) => whishlist());
+            //return MaterialPageRoute(builder: (context) => whishlist());
             return MaterialPageRoute(
                 builder: (context) => const WhishlistVide(
-                  title: 'Ma liste de souhaits',
-                ));
+                      title: 'Ma liste de souhaits',
+                    ));
 
           case "/like":
-            //return MaterialPageRoute(builder: (context) => const LikesvidesWidget());
             return MaterialPageRoute(
-              builder: (context) => const DetailJeu(
-                title: 'Détail du jeu',
-              ));
+                builder: (context) => const LikesvidesWidget(
+                      title: 'like',
+                    ));
 
-          case "/help":
-          //return MaterialPageRoute(builder: (context) => const Help());
+          case "/Detail":
+          /*return MaterialPageRoute(
+                  builder: (context) => DetailJeu(
+                        title: 'Détail du jeu',
+                        game: Navigator.of(context).pop(""),
+                      ));*/
+          case "/Search":
+            return MaterialPageRoute(builder: (context) => Search());
           default:
             return MaterialPageRoute(
                 builder: (context) => Connexion(
