@@ -38,7 +38,6 @@ class MyTextField extends StatelessWidget {
       ),
       style: const TextStyle(color: AppColors.white),
     );
-    throw UnimplementedError();
   }
 }
 
@@ -81,6 +80,5 @@ class MyTextFieldResearch extends StatelessWidget {
           )),
       style: const TextStyle(color: AppColors.white),
     );
-    throw UnimplementedError();
   }
 }

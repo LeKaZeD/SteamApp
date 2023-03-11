@@ -18,57 +18,161 @@ class DetailJeu extends StatefulWidget {
 }
 
 class _DetailJeuState extends State<DetailJeu> {
+  bool isLike = false;
+  bool isWish = false;
+
+  void GameLike() {
+    setState(() {
+      isLike = true;
+    });
+  }
+
+  void Like() {
+    if (isLike) {
+      setState(() {
+        isLike = false;
+      });
+      ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(widget.game.name + " enlevé des likes")));
+    } else {
+      setState(() {
+        isLike = true;
+      });
+      ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(widget.game.name + " ajouté au like")));
+    }
+  }
+
+  void WishList() {
+    if (isWish) {
+      setState(() {
+        isWish = false;
+      });
+      ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(widget.game.name + " enlevé de la Wishlist")));
+    } else {
+      setState(() {
+        isWish = true;
+      });
+      ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(widget.game.name + " ajouté de la Wishlist")));
+    }
+  }
+
+  void GameWish() {
+    setState(() {
+      isWish = true;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    GameLike();
+    GameWish();
+  }
+
   @override
   Widget build(BuildContext context) {
-    void Like() {}
-
-    void WhishList() {}
-
-    Widget titleSection = Container(
-        alignment: Alignment.center,
-        margin: const EdgeInsets.only(
-            left: 20.0, top: 0.0, right: 20.0, bottom: 0.0),
+    Widget titleSection = Card(
         color: AppColors.input,
-        child: Row(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(
-                  left: 20.0, top: 15.0, right: 20.0, bottom: 15.0),
-              child: SvgPicture.asset(AppVactorialImages.emptyLikes),
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(
-                      left: 0.0, top: 0.0, right: 0.0, bottom: 10.0),
-                  child: Text(
-                    widget.game.name,
-                    style: const TextStyle(
-                        fontFamily: 'Proxima Nova',
-                        fontWeight: FontWeight.normal,
-                        fontSize: 15,
-                        color: AppColors.white),
-                    textAlign: TextAlign.center,
-                  ),
+        margin: const EdgeInsets.all(16),
+        elevation: 5,
+        child: Container(
+            decoration: BoxDecoration(
+              color: AppColors.input,
+              image: DecorationImage(
+                fit: BoxFit.cover,
+                colorFilter: ColorFilter.mode(
+                    Colors.black.withOpacity(0.1), BlendMode.dstATop),
+                image: NetworkImage(
+                  widget.game.imgURL,
                 ),
-                Text(
-                  widget.game.publisher[0],
-                  style: const TextStyle(
-                      fontFamily: 'Proxima Nova',
-                      fontWeight: FontWeight.normal,
-                      fontSize: 12,
-                      color: AppColors.white),
-                  textAlign: TextAlign.center,
-                ),
-              ],
+              ),
             ),
-          ],
-        ));
+            child: Row(children: [
+              Padding(
+                  padding: const EdgeInsets.all(8),
+                  child: Container(
+                    decoration: BoxDecoration(
+                        border: Border.all(
+                            width: 0.5, color: AppColors.placeholder)),
+                    child: Image.network(
+                      widget.game.imgURL,
+                      fit: BoxFit.cover,
+                      height: 100,
+                      width: 70,
+                    ),
+                  )),
+              Expanded(
+                flex: 100,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(widget.game.name,
+                        textAlign: TextAlign.left,
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(color: AppColors.white)),
+                    Text(
+                      widget.game.publisher[0],
+                      textAlign: TextAlign.left,
+                      overflow: TextOverflow.ellipsis,
+                      style:
+                          const TextStyle(color: AppColors.white, fontSize: 12),
+                    ),
+                    const SizedBox(height: 10),
+                    Text("Prix : " + widget.game.prix,
+                        textAlign: TextAlign.left,
+                        style: const TextStyle(color: AppColors.white))
+                  ],
+                ),
+              )
+            ])));
 
     Widget buttonSection = Padding(
       padding: const EdgeInsets.all(15.0),
-      child: Button(onTap: () {}, name: "DESCRIPTION"),
+      child: Row(
+        children: [
+          Expanded(
+            child: ElevatedButton(
+              onHover: (event) {},
+              onPressed: () {},
+              style: ElevatedButton.styleFrom(
+                shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(8),
+                        topLeft: Radius.circular(8))),
+                backgroundColor: AppColors.primary,
+              ),
+              child: const Text(
+                "DESCRIPTION",
+                style: TextStyle(
+                  color: AppColors.white,
+                ),
+              ),
+            ),
+          ),
+          Expanded(
+            child: ElevatedButton(
+              onHover: (event) {},
+              onPressed: () {},
+              style: ElevatedButton.styleFrom(
+                  shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.only(
+                          bottomRight: Radius.circular(8),
+                          topRight: Radius.circular(8))),
+                  backgroundColor: AppColors.background.withOpacity(1.0),
+                  side: const BorderSide(color: AppColors.primary)),
+              child: const Text(
+                "AVIS",
+                style: TextStyle(
+                  color: AppColors.white,
+                ),
+              ),
+            ),
+          )
+        ],
+      ),
       //_buildButtonColumn(ColoredBox(color: Colors.red), "DESCRIPTION"),
     );
 
@@ -99,19 +203,35 @@ class _DetailJeuState extends State<DetailJeu> {
           actions: <Widget>[
             IconButton(
                 onPressed: Like,
-                icon: SvgPicture.asset(AppVactorialImages.like)),
+                icon: isLike
+                    ? SvgPicture.asset(AppVactorialImages.likeFull)
+                    : SvgPicture.asset(AppVactorialImages.like)),
             IconButton(
-                onPressed: WhishList,
-                icon: SvgPicture.asset(AppVactorialImages.whishlist))
+                onPressed: WishList,
+                icon: isWish
+                    ? SvgPicture.asset(AppVactorialImages.whishlistFull)
+                    : SvgPicture.asset(AppVactorialImages.whishlist))
           ],
           title: const Text("Détail du jeu"),
         ),
         body: ListView(
           children: [
-            imageSection,
-            titleSection,
-            buttonSection,
-            descriptionSection,
+            Stack(
+              clipBehavior: Clip.antiAlias,
+              children: [
+                imageSection,
+                Positioned.fill(
+                  top: 290,
+                  child: Wrap(
+                    children: [
+                      titleSection,
+                      buttonSection,
+                      descriptionSection,
+                    ],
+                  ),
+                )
+              ],
+            )
           ],
         ));
   }
