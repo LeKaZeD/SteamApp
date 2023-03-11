@@ -45,12 +45,14 @@ class MyTextFieldResearch extends StatelessWidget {
   final controler;
   final String hintText;
   final bool obscureText;
+  final formKey;
 
   const MyTextFieldResearch(
       {super.key,
       required this.controler,
       required this.hintText,
-      required this.obscureText});
+      required this.obscureText,
+      required this.formKey});
 
   @override
   Widget build(BuildContext context) {
@@ -79,6 +81,13 @@ class MyTextFieldResearch extends StatelessWidget {
             child: Icon(Icons.search_outlined, color: AppColors.primary),
           )),
       style: const TextStyle(color: AppColors.white),
+      onFieldSubmitted: (value) {
+        if (formKey.currentState.validate()) {
+          //formKey.currentState.save();
+          print(controler.text);
+          Navigator.of(context).pushNamed("/Search");
+        }
+      },
     );
   }
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:steam_app/Screen/Connexion.dart';
 import 'package:steam_app/Screen/DetailJeu.dart';
 import 'package:steam_app/Screen/LikesvidesWidget.dart';
+import 'package:steam_app/Screen/Search.dart';
 import 'package:steam_app/Screen/WhishlistVide.dart';
 import 'package:steam_app/domain/entities/GameDescriptionQuestion.dart';
 
@@ -70,6 +71,8 @@ class MyApp extends StatelessWidget {
                         title: 'Détail du jeu',
                         game: Navigator.of(context).pop(""),
                       ));*/
+          case "/Search":
+            return MaterialPageRoute(builder: (context) => Search());
           default:
             return MaterialPageRoute(
                 builder: (context) => Connexion(

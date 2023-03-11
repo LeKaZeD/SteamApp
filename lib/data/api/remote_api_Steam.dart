@@ -51,13 +51,13 @@ class RemoteAPISteam {
                 if (result['price_overview']['final_formatted'] != null) {
                   prix = result['price_overview']['final_formatted'];
                 } else {
-                  prix = "free";
+                  prix = "free to play";
                 }
               } else {
                 prix = "14,99€";
               }
             } else {
-              prix = "free";
+              prix = "free to play";
             }
           } catch (err) {}
 

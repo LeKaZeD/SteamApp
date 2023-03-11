@@ -121,6 +121,8 @@ class _MyHomePageState extends State<MyHomePage> {
     _controller = ScrollController()..addListener(_loadMore);
   }
 
+  final _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -153,6 +155,7 @@ class _MyHomePageState extends State<MyHomePage> {
               Padding(
                 padding: EdgeInsets.all(8),
                 child: Form(
+                  key: _formKey,
                   child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       mainAxisSize: MainAxisSize.min,
@@ -161,7 +164,8 @@ class _MyHomePageState extends State<MyHomePage> {
                         MyTextFieldResearch(
                             controler: widget.search,
                             hintText: "Rechercher un jeu...",
-                            obscureText: false),
+                            obscureText: false,
+                            formKey: _formKey),
                         const SizedBox(height: 10),
                       ]),
                 ),
@@ -220,7 +224,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                                   const SizedBox(
                                                     height: 8,
                                                   ),
-                                                  Container(
+                                                  Flexible(
                                                     child: Text(
                                                       _posts[0].description,
                                                       textAlign: TextAlign.left,
