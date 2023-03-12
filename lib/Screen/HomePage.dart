@@ -1,20 +1,13 @@
-import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
-import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:flutter/material.dart';
 import 'package:steam_app/AppColors.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:steam_app/Screen/Component/Input.dart';
 import 'package:steam_app/Screen/DetailJeu.dart';
-import 'package:steam_app/data/api/remote_api_Steam.dart';
-import 'package:steam_app/data/models/response/topgames.dart';
 import 'package:steam_app/domain/entities/GameDescriptionQuestion.dart';
 import 'package:steam_app/domain/repo/TopGameRepo.dart';
+import 'package:steam_app/res/app_vactorial_images.dart';
 import 'package:steam_app/widget/Game_widget.dart';
-
-import '../res/app_images.dart';
-import '../res/app_vactorial_images.dart';
-
-import 'dart:convert';
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({super.key, required this.title, this.logged});
@@ -56,7 +49,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   bool _isFirstLoadRunning = false;
   bool _hasNextPage = true;
-  bool _isFirstcardLoad = false;
 
   bool _isLoadMoreRunning = false;
 
@@ -103,7 +95,9 @@ class _MyHomePageState extends State<MyHomePage> {
         _posts.addAll(games);
       });
     } catch (err) {
-      print(err);
+      if (kDebugMode) {
+        print(err);
+      }
     }
 
     setState(() {
@@ -153,7 +147,7 @@ class _MyHomePageState extends State<MyHomePage> {
           child: Column(
             children: [
               Padding(
-                padding: EdgeInsets.all(8),
+                padding: const EdgeInsets.all(8),
                 child: Form(
                   key: _formKey,
                   child: Column(
@@ -165,7 +159,11 @@ class _MyHomePageState extends State<MyHomePage> {
                             controler: widget.search,
                             hintText: "Rechercher un jeu...",
                             obscureText: false,
-                            formKey: _formKey),
+                            formKey: _formKey,
+                            action: () {
+                              Navigator.of(context).pushNamed("/Search",
+                                  arguments: widget.search);
+                            }),
                         const SizedBox(height: 10),
                       ]),
                 ),
@@ -241,21 +239,31 @@ class _MyHomePageState extends State<MyHomePage> {
                                                   ),
                                                   SizedBox(
                                                     child: ElevatedButton(
-                                                      onPressed: () {},
+                                                      onPressed: () {
+                                                        Navigator.push(
+                                                            context,
+                                                            MaterialPageRoute(
+                                                              builder: (context) =>
+                                                                  DetailJeu(
+                                                                      title:
+                                                                          "title",
+                                                                      game: _posts[
+                                                                          0]),
+                                                            ));
+                                                      },
                                                       style: ElevatedButton
                                                           .styleFrom(
                                                               backgroundColor:
                                                                   AppColors
                                                                       .primary),
-                                                      child: Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                      .symmetric(
+                                                      child: const Padding(
+                                                          padding: EdgeInsets
+                                                              .symmetric(
                                                                   vertical: 5.0,
                                                                   horizontal:
                                                                       5.0),
                                                           child: Column(
-                                                            children: const [
+                                                            children: [
                                                               Text(
                                                                 "En savoir plus",
                                                                 style: TextStyle(
@@ -272,7 +280,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                               ),
                                             ),
                                           ),
-                                          Spacer(),
+                                          const Spacer(),
                                           Padding(
                                               padding: const EdgeInsets.all(16),
                                               child: Container(
@@ -296,10 +304,10 @@ class _MyHomePageState extends State<MyHomePage> {
                           const SizedBox(
                             height: 8,
                           ),
-                          Row(
+                          const Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
-                            children: const [
+                            children: [
                               Padding(
                                 padding: EdgeInsets.only(left: 8),
                                 child: Text("Les meilleurs ventes",

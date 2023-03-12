@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:steam_app/AppColors.dart';
 import 'package:steam_app/Screen/Component/Button.dart';
 import 'package:steam_app/Screen/Component/Input.dart';
-import 'package:steam_app/Screen/HomePage.dart';
 
 class Connexion extends StatefulWidget {
   Connexion({super.key, required this.title});

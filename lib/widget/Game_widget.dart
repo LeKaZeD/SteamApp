@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:steam_app/data/api/remote_api_Steam.dart';
 import 'package:steam_app/domain/entities/GameDescriptionQuestion.dart';
 
 import '../AppColors.dart';
@@ -55,33 +54,31 @@ class Gamewidget extends StatelessWidget {
                             textAlign: TextAlign.left,
                             overflow: TextOverflow.ellipsis,
                             style: const TextStyle(color: AppColors.white)),
-                        Container(
-                          child: Text(
-                            game.publisher[0],
-                            textAlign: TextAlign.left,
-                            overflow: TextOverflow.ellipsis,
-                            style: const TextStyle(
-                                color: AppColors.white, fontSize: 12),
-                          ),
+                        Text(
+                          game.publisher[0],
+                          textAlign: TextAlign.left,
+                          overflow: TextOverflow.ellipsis,
+                          style: const TextStyle(
+                              color: AppColors.white, fontSize: 12),
                         ),
                         const SizedBox(height: 10),
-                        Text("Prix : " + game.prix,
+                        Text("Prix : ${game.prix}",
                             textAlign: TextAlign.left,
-                            style: TextStyle(color: AppColors.white))
+                            style: const TextStyle(color: AppColors.white))
                       ],
                     ),
                   ),
-                  Spacer(),
+                  const Spacer(),
                   SizedBox(
                     width: 120,
                     child: ElevatedButton(
                       onPressed: onTap,
                       style: ElevatedButton.styleFrom(
                           backgroundColor: AppColors.primary),
-                      child: Padding(
+                      child: const Padding(
                           padding: EdgeInsets.symmetric(vertical: 39.0),
                           child: Column(
-                            children: const [
+                            children: [
                               Text(
                                 "En savoir",
                                 style: TextStyle(

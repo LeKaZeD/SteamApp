@@ -72,7 +72,10 @@ class MyApp extends StatelessWidget {
                         game: Navigator.of(context).pop(""),
                       ));*/
           case "/Search":
-            return MaterialPageRoute(builder: (context) => Search());
+            return MaterialPageRoute(
+                builder: (context) => Search(
+                      controler: settings.arguments,
+                    ));
           default:
             return MaterialPageRoute(
                 builder: (context) => Connexion(
