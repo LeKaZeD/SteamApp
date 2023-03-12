@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:steam_app/data/models/request/requestGameDescription.dart';
 import 'package:steam_app/data/models/request/requestGameName.dart';
 import 'package:steam_app/data/models/response/GameDescription.dart';
@@ -29,7 +30,9 @@ class RemoteAPISteam {
         }
       }
     } catch (err) {
-      print(err);
+      if (kDebugMode) {
+        print(err);
+      }
     }
     return [];
   }
@@ -61,7 +64,11 @@ class RemoteAPISteam {
             } else {
               prix = "free to play";
             }
-          } catch (err) {}
+          } catch (err) {
+            if (kDebugMode) {
+              print(err);
+            }
+          }
 
           return gameDescription(
               name: result['name'],
@@ -73,10 +80,14 @@ class RemoteAPISteam {
               prix: prix); //creation d'un objet GameDescription
         }
       } else {
-        print(response.statusCode);
+        if (kDebugMode) {
+          print(response.statusCode);
+        }
       }
     } catch (err) {
-      print(err);
+      if (kDebugMode) {
+        print(err);
+      }
     }
     return gameDescription(
         name: "pas",
@@ -105,7 +116,9 @@ class RemoteAPISteam {
         }
       }
     } catch (err) {
-      print(err);
+      if (kDebugMode) {
+        print(err);
+      }
     }
     return [];
   }

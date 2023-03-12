@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:steam_app/AppColors.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:steam_app/Screen/Component/Button.dart';
 import 'package:steam_app/domain/entities/GameDescriptionQuestion.dart';
-
-import '../res/app_images.dart';
-import '../res/app_vactorial_images.dart';
+import 'package:steam_app/res/app_vactorial_images.dart';
 
 class DetailJeu extends StatefulWidget {
   DetailJeu({super.key, required this.title, required this.game});
@@ -33,13 +30,13 @@ class _DetailJeuState extends State<DetailJeu> {
         isLike = false;
       });
       ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(widget.game.name + " enlevé des likes")));
+          SnackBar(content: Text("${widget.game.name} enlevé des likes")));
     } else {
       setState(() {
         isLike = true;
       });
       ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(widget.game.name + " ajouté au like")));
+          SnackBar(content: Text("${widget.game.name} ajouté au like")));
     }
   }
 
@@ -49,13 +46,13 @@ class _DetailJeuState extends State<DetailJeu> {
         isWish = false;
       });
       ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(widget.game.name + " enlevé de la Wishlist")));
+          SnackBar(content: Text("${widget.game.name} enlevé de la Wishlist")));
     } else {
       setState(() {
         isWish = true;
       });
       ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(widget.game.name + " ajouté de la Wishlist")));
+          SnackBar(content: Text("${widget.game.name} ajouté de la Wishlist")));
     }
   }
 
@@ -121,7 +118,7 @@ class _DetailJeuState extends State<DetailJeu> {
                           const TextStyle(color: AppColors.white, fontSize: 12),
                     ),
                     const SizedBox(height: 10),
-                    Text("Prix : " + widget.game.prix,
+                    Text("Prix : ${widget.game.prix}",
                         textAlign: TextAlign.left,
                         style: const TextStyle(color: AppColors.white))
                   ],

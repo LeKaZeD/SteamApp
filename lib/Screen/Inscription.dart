@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-
-import '../AppColors.dart';
-import 'Component/Button.dart';
-import 'Component/Input.dart';
+import 'package:steam_app/AppColors.dart';
+import 'package:steam_app/Screen/Component/Button.dart';
+import 'package:steam_app/Screen/Component/Input.dart';
 
 class Inscription extends StatefulWidget {
   Inscription({super.key, required this.title});

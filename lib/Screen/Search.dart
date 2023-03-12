@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:steam_app/AppColors.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -37,7 +38,7 @@ class _Search extends State<Search> {
         child: Column(
           children: [
             Padding(
-              padding: EdgeInsets.all(8),
+              padding: const EdgeInsets.all(8),
               child: Form(
                 key: _formKey,
                 child: Column(
@@ -115,9 +116,7 @@ class _Search extends State<Search> {
                           )),
                         ),
                       )
-                : Container(
-                    child: Text("nop"),
-                  ),
+                : const Text("nop"),
           ],
         ),
       ),
@@ -173,7 +172,9 @@ class _Search extends State<Search> {
         _posts = games;
       });
     } catch (err) {
-      print(err);
+      if (kDebugMode) {
+        print(err);
+      }
     }
 
     setState(() {

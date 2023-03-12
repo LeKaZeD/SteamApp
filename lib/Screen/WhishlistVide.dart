@@ -3,12 +3,11 @@ import 'package:steam_app/AppColors.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:steam_app/res/app_vactorial_images.dart';
 
-
-
 class WhishlistVide extends StatefulWidget {
   const WhishlistVide({super.key, required this.title});
 
   final String title;
+
   @override
   _WhishlistVideState createState() => _WhishlistVideState();
 }
@@ -20,7 +19,7 @@ class _WhishlistVideState extends State<WhishlistVide> {
       backgroundColor: AppColors.background,
       appBar: AppBar(
         backgroundColor: AppColors.background,
-        title: Text("Ma liste de souhaits"),
+        title: const Text("Ma liste de souhaits"),
       ),
       body: Container(
           alignment: Alignment.center,
@@ -28,14 +27,14 @@ class _WhishlistVideState extends State<WhishlistVide> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Padding(
-                padding: const EdgeInsets.only(left:0.0,top: 250.0,right: 0.0,bottom: 50.0),
+                padding: const EdgeInsets.only(
+                    left: 0.0, top: 250.0, right: 0.0, bottom: 50.0),
                 child: SvgPicture.asset(AppVactorialImages.emptyWhishlist),
               ),
               const Padding(
                 padding: EdgeInsets.all(10.0),
                 child: Text(
                   'Vous n’avez encore pas liké de contenu.',
-
                   style: TextStyle(
                       fontFamily: 'Proxima Nova',
                       fontWeight: FontWeight.normal,
@@ -54,9 +53,7 @@ class _WhishlistVideState extends State<WhishlistVide> {
                 textAlign: TextAlign.center,
               ),
             ],
-          )
-
-      ),
+          )),
     );
   }
 }

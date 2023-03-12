@@ -86,7 +86,6 @@ class MyTextFieldResearch extends StatelessWidget {
       onFieldSubmitted: (value) {
         if (formKey.currentState.validate()) {
           //formKey.currentState.save();
-          print(controler.text);
           action();
         }
       },

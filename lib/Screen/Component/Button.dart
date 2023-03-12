@@ -14,7 +14,7 @@ class Button extends StatelessWidget {
       onPressed: onTap,
       style: ElevatedButton.styleFrom(
         backgroundColor: AppColors.primary,
-        minimumSize: Size.fromHeight(50),
+        minimumSize: const Size.fromHeight(50),
       ),
       child: Text(
         name,
@@ -23,7 +23,6 @@ class Button extends StatelessWidget {
         ),
       ),
     );
-    throw UnimplementedError();
   }
 }
 
