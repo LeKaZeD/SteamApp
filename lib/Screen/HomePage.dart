@@ -256,14 +256,14 @@ class _MyHomePageState extends State<MyHomePage> {
                                                               backgroundColor:
                                                                   AppColors
                                                                       .primary),
-                                                      child: const Padding(
-                                                          padding: EdgeInsets
+                                                      child: Padding(
+                                                          padding: const EdgeInsets
                                                               .symmetric(
                                                                   vertical: 5.0,
                                                                   horizontal:
                                                                       5.0),
                                                           child: Column(
-                                                            children: [
+                                                            children: const [
                                                               Text(
                                                                 "En savoir plus",
                                                                 style: TextStyle(
@@ -304,10 +304,10 @@ class _MyHomePageState extends State<MyHomePage> {
                           const SizedBox(
                             height: 8,
                           ),
-                          const Row(
+                          Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
+                            children: const [
                               Padding(
                                 padding: EdgeInsets.only(left: 8),
                                 child: Text("Les meilleurs ventes",
