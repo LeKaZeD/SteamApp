@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:steam_app/AppColors.dart';
 import 'package:steam_app/Screen/Component/Button.dart';
 import 'package:steam_app/Screen/Component/Input.dart';
+import 'package:steam_app/data/api/AuthService.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class Connexion extends StatefulWidget {
   Connexion({super.key, required this.title});
@@ -16,15 +18,48 @@ class Connexion extends StatefulWidget {
 
 class _ConnexionPageState extends State<Connexion> {
   void inscription() {
+    setState(() {
+      errorSupa = false;
+    });
     Navigator.of(context).pushNamed("/inscription");
   }
 
-  void login() {
-    Navigator.of(context).pushNamed("/home");
+  bool errorSupa = false;
+  String erromsg = '';
+
+  void login() async {
+    try {
+      final res = await AuthService(Supabase.instance.client).signInUser(
+          widget.EmailController.text, widget.passwordController.text);
+      if (res.session != null) {
+        Navigator.of(context).pushNamed("/home");
+      }
+    } on AuthException catch (e) {
+      setState(() {
+        errorSupa = true;
+        erromsg = e.message;
+      });
+    }
+  }
+
+  @override
+  void dispose() {
+    errorSupa;
+    erromsg;
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    Widget errorDisplay = Row(children: [
+      const SizedBox(height: 100),
+      Text(
+        erromsg,
+        style: TextStyle(color: AppColors.error),
+      ),
+      const SizedBox(height: 10)
+    ]);
+
     return Scaffold(
       backgroundColor: AppColors.background,
       appBar: AppBar(
@@ -64,15 +99,18 @@ class _ConnexionPageState extends State<Connexion> {
                     )),
                 const SizedBox(height: 20),
                 MyTextField(
-                    controler: widget.EmailController,
-                    hintText: "E-mail",
-                    obscureText: false),
+                  controler: widget.EmailController,
+                  hintText: "E-mail",
+                  obscureText: false,
+                  error: errorSupa,
+                ),
                 const SizedBox(height: 10),
                 MyTextField(
                     controler: widget.passwordController,
                     hintText: "Mot de passe",
-                    obscureText: true),
-                const SizedBox(height: 100),
+                    obscureText: true,
+                    error: errorSupa),
+                errorSupa ? errorDisplay : const SizedBox(height: 100),
                 Button(onTap: login, name: "Se connecter"),
                 const SizedBox(height: 10),
                 ButtonGost(onTap: inscription, name: "Créer un nouveau compte")

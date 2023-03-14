@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:steam_app/AppColors.dart';
 import 'package:steam_app/Screen/Component/Button.dart';
 import 'package:steam_app/Screen/Component/Input.dart';
+import 'package:steam_app/data/api/AuthService.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class Inscription extends StatefulWidget {
   Inscription({super.key, required this.title});
@@ -17,7 +19,51 @@ class Inscription extends StatefulWidget {
 }
 
 class _InscriptionPageState extends State<Inscription> {
-  void Inscription() {}
+  bool username = false;
+  bool email = false;
+  bool pass = false;
+  String msgError = '';
+
+  void Inscription() async {
+    setState(() {
+      email = false;
+      pass = false;
+      username = false;
+    });
+    if (widget.usernameController.text.length < 5) {
+      setState(() {
+        username = true;
+        msgError = "Le nom d'utilisateur doit contenir au moin 5 lettre";
+      });
+    }
+    if (!widget.emailController.text.contains("@") &&
+        widget.emailController.text.length < 10) {
+      setState(() {
+        email = true;
+        msgError = "L'email doit contenir au moin un @ et 10 carractère";
+      });
+    }
+    if (widget.passwordController.text !=
+        widget.passwordConfirmController.text) {
+      setState(() {
+        pass = true;
+        msgError = "Les mots de passe ne sont pas pareil";
+      });
+    }
+    if (!username && !email && !pass) {
+      try {
+        final res = await AuthService(Supabase.instance.client).signUp(
+            widget.emailController.text, widget.passwordController.text);
+        if (res.session != null) {
+          Navigator.of(context).pushNamed("/home");
+        }
+      } on AuthException catch (e) {
+        setState(() {
+          msgError = e.message;
+        });
+      }
+    } else {}
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -60,24 +106,31 @@ class _InscriptionPageState extends State<Inscription> {
                     )),
                 const SizedBox(height: 20),
                 MyTextField(
-                    controler: widget.usernameController,
-                    hintText: "Nom d'utilisateur",
-                    obscureText: false),
+                  controler: widget.usernameController,
+                  hintText: "Nom d'utilisateur",
+                  obscureText: false,
+                  error: username,
+                ),
                 const SizedBox(height: 10),
                 MyTextField(
-                    controler: widget.emailController,
-                    hintText: "E-mail",
-                    obscureText: false),
+                  controler: widget.emailController,
+                  hintText: "E-mail",
+                  obscureText: false,
+                  error: email,
+                ),
                 const SizedBox(height: 10),
                 MyTextField(
                     controler: widget.passwordController,
                     hintText: "Mot de passe",
-                    obscureText: true),
+                    obscureText: true,
+                    error: pass),
                 const SizedBox(height: 10),
                 MyTextField(
-                    controler: widget.passwordConfirmController,
-                    hintText: "Vérification du mot de passe",
-                    obscureText: true),
+                  controler: widget.passwordConfirmController,
+                  hintText: "Vérification du mot de passe",
+                  obscureText: true,
+                  error: pass,
+                ),
                 Container(
                   constraints: const BoxConstraints(
                     minHeight: 10,
