@@ -3,7 +3,6 @@ import 'package:steam_app/AppColors.dart';
 import 'package:steam_app/Screen/Component/Button.dart';
 import 'package:steam_app/Screen/Component/Input.dart';
 import 'package:steam_app/data/api/AuthService.dart';
-import 'package:steam_app/data/api/databaseService.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class Connexion extends StatefulWidget {

@@ -1,6 +1,4 @@
 import 'dart:async';
-
-import 'package:steam_app/Screen/Component/errorException.dart';
 import 'package:steam_app/data/api/databaseService.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 

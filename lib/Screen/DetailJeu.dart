@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:steam_app/AppColors.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:steam_app/data/api/databaseService.dart';
-import 'package:steam_app/data/api/remote_api_Steam.dart';
 import 'package:steam_app/domain/entities/GameDescriptionQuestion.dart';
 import 'package:steam_app/domain/repo/AvisRepro.dart';
 import 'package:steam_app/res/app_vactorial_images.dart';
@@ -103,7 +102,7 @@ class _DetailJeuState extends State<DetailJeu> {
     });
   }
 
-  late ScrollController _controller = ScrollController();
+  late final ScrollController _controller = ScrollController();
 
   @override
   void initState() {

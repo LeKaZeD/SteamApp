@@ -85,7 +85,7 @@ class _LikesvidesWidgetState extends State<LikesvidesWidget> {
       backgroundColor: AppColors.background,
       appBar: AppBar(
         backgroundColor: AppColors.background,
-        title: Text("Mes Likes"),
+        title: const Text("Mes Likes"),
       ),
       body: loading
           ? const Center(

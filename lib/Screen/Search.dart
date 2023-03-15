@@ -84,7 +84,7 @@ class _Search extends State<Search> {
                       )
                     : _posts.length == 0
                         ? Container(
-                            child: Text("Aucun resultat",
+                            child: const Text("Aucun resultat",
                                 style: TextStyle(color: AppColors.white)),
                           )
                         : Expanded(

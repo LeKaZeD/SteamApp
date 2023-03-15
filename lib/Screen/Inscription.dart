@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:steam_app/AppColors.dart';
 import 'package:steam_app/Screen/Component/Button.dart';
