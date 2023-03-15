@@ -76,6 +76,7 @@ class _ConnexionPageState extends State<Connexion> {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: AppColors.background,
+        automaticallyImplyLeading: false,
       ),
       body: Container(
         alignment: Alignment.topCenter,

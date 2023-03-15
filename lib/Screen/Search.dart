@@ -82,40 +82,47 @@ class _Search extends State<Search> {
                     ? const Center(
                         child: CircularProgressIndicator(),
                       )
-                    : Expanded(
-                        child: Center(
-                          child: SizedBox(
-                              child: Column(
-                            children: [
-                              Expanded(
-                                child: ListView.builder(
-                                  itemCount: _posts.length,
-                                  controller: _controller,
-                                  itemBuilder: (_, index) => Gamewidget(
-                                      game: _posts[index],
-                                      onTap: () {
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) => DetailJeu(
-                                                  title: "title",
-                                                  game: _posts[index]),
-                                            ));
-                                      }),
-                                ),
-                              ),
-                              if (_isLoadMoreRunning == true)
-                                const Padding(
-                                  padding: EdgeInsets.only(top: 10, bottom: 40),
-                                  child: Center(
-                                    child: CircularProgressIndicator(),
+                    : _posts.length == 0
+                        ? Container(
+                            child: Text("Aucun resultat",
+                                style: TextStyle(color: AppColors.white)),
+                          )
+                        : Expanded(
+                            child: Center(
+                              child: SizedBox(
+                                  child: Column(
+                                children: [
+                                  Expanded(
+                                    child: ListView.builder(
+                                      itemCount: _posts.length,
+                                      controller: _controller,
+                                      itemBuilder: (_, index) => Gamewidget(
+                                          game: _posts[index],
+                                          onTap: () {
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      DetailJeu(
+                                                          title: "title",
+                                                          game: _posts[index]),
+                                                ));
+                                          }),
+                                    ),
                                   ),
-                                ),
-                              if (_hasNextPage == false) Container(),
-                            ],
-                          )),
-                        ),
-                      )
+                                  if (_isLoadMoreRunning == true)
+                                    const Padding(
+                                      padding:
+                                          EdgeInsets.only(top: 10, bottom: 40),
+                                      child: Center(
+                                        child: CircularProgressIndicator(),
+                                      ),
+                                    ),
+                                  if (_hasNextPage == false) Container(),
+                                ],
+                              )),
+                            ),
+                          )
                 : const Text("nop"),
           ],
         ),

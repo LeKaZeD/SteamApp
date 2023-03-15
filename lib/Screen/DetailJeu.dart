@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:steam_app/AppColors.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:steam_app/data/api/databaseService.dart';
+import 'package:steam_app/data/api/remote_api_Steam.dart';
 import 'package:steam_app/domain/entities/GameDescriptionQuestion.dart';
+import 'package:steam_app/domain/repo/AvisRepro.dart';
 import 'package:steam_app/res/app_vactorial_images.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -21,11 +23,22 @@ class _DetailJeuState extends State<DetailJeu> {
   bool isWish = false;
   bool avis = false;
   bool description = true;
+  bool loading = true;
+  List _avis = [];
 
   void avisfun() {
+    loadavis();
     setState(() {
       avis = true;
       description = false;
+    });
+  }
+
+  void loadavis() async {
+    final res = await AvisRepro().getAvisGame(widget.game.appid, 40);
+    setState(() {
+      _avis = res;
+      loading = false;
     });
   }
 
@@ -33,6 +46,7 @@ class _DetailJeuState extends State<DetailJeu> {
     setState(() {
       avis = false;
       description = true;
+      loading = true;
     });
   }
 
@@ -252,8 +266,8 @@ class _DetailJeuState extends State<DetailJeu> {
       ),
     );
 
-    Widget avisSection = Padding(
-      padding: const EdgeInsets.only(left: 16, right: 16),
+    Widget avisSection = const Padding(
+      padding: EdgeInsets.only(left: 16, right: 16),
       child: Text('avis'),
     );
 
@@ -304,7 +318,60 @@ class _DetailJeuState extends State<DetailJeu> {
                   ),
                 ),
                 buttonSection,
-                description ? descriptionSection : avisSection,
+                description
+                    ? descriptionSection
+                    : loading
+                        ? const Center(
+                            child: CircularProgressIndicator(),
+                          )
+                        : Column(
+                            children: [
+                              ListView.builder(
+                                  itemCount: _avis.length,
+                                  shrinkWrap: true,
+                                  itemBuilder: (_, index) {
+                                    return Card(
+                                      color: AppColors.input,
+                                      margin: const EdgeInsets.only(
+                                          top: 8,
+                                          left: 16,
+                                          right: 16,
+                                          bottom: 8),
+                                      elevation: 5,
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(32.0),
+                                        child: Container(
+                                          decoration: const BoxDecoration(
+                                            color: AppColors.input,
+                                          ),
+                                          child: Row(
+                                            children: [
+                                              Expanded(
+                                                flex: 100,
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(_avis[index].msg,
+                                                        textAlign:
+                                                            TextAlign.left,
+                                                        overflow:
+                                                            TextOverflow.clip,
+                                                        style: const TextStyle(
+                                                            color: AppColors
+                                                                .white)),
+                                                  ],
+                                                ),
+                                              ),
+                                              const Spacer(),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    );
+                                  }),
+                            ],
+                          ),
               ],
             ),
           ],
