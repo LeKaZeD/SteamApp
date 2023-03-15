@@ -103,6 +103,8 @@ class _DetailJeuState extends State<DetailJeu> {
     });
   }
 
+  late ScrollController _controller = ScrollController();
+
   @override
   void initState() {
     super.initState();
@@ -297,6 +299,8 @@ class _DetailJeuState extends State<DetailJeu> {
           title: const Text("Détail du jeu"),
         ),
         body: ListView(
+          shrinkWrap: true,
+          scrollDirection: Axis.vertical,
           children: [
             Column(
               children: [
@@ -328,6 +332,7 @@ class _DetailJeuState extends State<DetailJeu> {
                             children: [
                               ListView.builder(
                                   itemCount: _avis.length,
+                                  controller: _controller,
                                   shrinkWrap: true,
                                   itemBuilder: (_, index) {
                                     return Card(
