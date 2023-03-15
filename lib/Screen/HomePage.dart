@@ -112,7 +112,8 @@ class _MyHomePageState extends State<MyHomePage> {
   void initState() {
     super.initState();
     _firstLoad();
-    _controller = ScrollController()..addListener(_loadMore);
+    _controller = ScrollController()
+      ..addListener(_loadMore);
   }
 
   final _formKey = GlobalKey<FormState>();
@@ -125,6 +126,125 @@ class _MyHomePageState extends State<MyHomePage> {
     // The Flutter framework has been optimized to make rerunning build methods
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
+    Widget frontitem = SizedBox(
+      height: 250,
+      child: _isFirstLoadRunning
+          ? Container()
+          : Card(
+        color: AppColors.input,
+        margin: const EdgeInsets.all(0),
+        elevation: 5,
+        child: Container(
+          decoration: BoxDecoration(
+            color: AppColors.input,
+            image: DecorationImage(
+              fit: BoxFit.cover,
+              colorFilter: ColorFilter.mode(
+                  Colors.black.withOpacity(0.5), BlendMode.dstATop),
+              image: NetworkImage(_posts[0].imgURL),
+            ),
+          ),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Expanded(
+                flex: 100,
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(_posts[0].name,
+                          textAlign: TextAlign.left,
+                          overflow: TextOverflow.ellipsis,
+                          style: const TextStyle(
+                              color: AppColors.white, fontSize: 19)),
+                      const SizedBox(
+                        height: 8,
+                      ),
+                      Flexible(
+                        child: Text(
+                          _posts[0].description,
+                          textAlign: TextAlign.left,
+                          overflow: TextOverflow.clip,
+                          style: const TextStyle(
+                              color: AppColors.white, fontSize: 12),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 8,
+                      ),
+                      SizedBox(
+                        child: ElevatedButton(
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      DetailJeu(
+                                          title: "title", game: _posts[0]),
+                                ));
+                          },
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: AppColors.primary),
+                          child: const Padding(
+                              padding: EdgeInsets.symmetric(
+                                  vertical: 5.0, horizontal: 5.0),
+                              child: Column(
+                                children: [
+                                  Text(
+                                    "En savoir plus",
+                                    style: TextStyle(
+                                        color: AppColors.white,
+                                        fontSize: 15),
+                                  ),
+                                ],
+                              )),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              const Spacer(),
+              Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: Container(
+                    decoration: BoxDecoration(
+                        border: Border.all(
+                            width: 0.5, color: AppColors.placeholder)),
+                    child: Image.network(
+                      _posts[0].imgURL,
+                      fit: BoxFit.cover,
+                      height: 150,
+                      width: 120,
+                    ),
+                  )),
+            ],
+          ),
+        ),
+      ),
+    );
+
+    Widget meilleurVente = const Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: EdgeInsets.only(left: 8),
+          child: Text("Les meilleurs ventes",
+              textAlign: TextAlign.left,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                  color: AppColors.white,
+                  fontSize: 15,
+                  decoration: TextDecoration.underline)),
+        ),
+      ],
+    );
+
     return Scaffold(
         appBar: AppBar(
           // Here we take the value from the MyHomePage object that was created by
@@ -168,185 +288,48 @@ class _MyHomePageState extends State<MyHomePage> {
                       ]),
                 ),
               ),
-              _isFirstLoadRunning
-                  ? const Center(
-                      child: CircularProgressIndicator(),
-                    )
-                  : Expanded(
-                      child: Column(
-                        children: [
-                          SizedBox(
-                            height: 250,
-                            child: _isFirstLoadRunning
-                                ? Container()
-                                : Card(
-                                    color: AppColors.input,
-                                    margin: const EdgeInsets.all(0),
-                                    elevation: 5,
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                        color: AppColors.input,
-                                        image: DecorationImage(
-                                          fit: BoxFit.cover,
-                                          colorFilter: ColorFilter.mode(
-                                              Colors.black.withOpacity(0.5),
-                                              BlendMode.dstATop),
-                                          image: NetworkImage(_posts[0].imgURL),
-                                        ),
-                                      ),
-                                      child: Row(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.end,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.end,
-                                        children: [
-                                          Expanded(
-                                            flex: 100,
-                                            child: Padding(
-                                              padding:
-                                                  const EdgeInsets.all(16.0),
-                                              child: Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.end,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Text(_posts[0].name,
-                                                      textAlign: TextAlign.left,
-                                                      overflow:
-                                                          TextOverflow.ellipsis,
-                                                      style: const TextStyle(
-                                                          color:
-                                                              AppColors.white,
-                                                          fontSize: 19)),
-                                                  const SizedBox(
-                                                    height: 8,
-                                                  ),
-                                                  Flexible(
-                                                    child: Text(
-                                                      _posts[0].description,
-                                                      textAlign: TextAlign.left,
-                                                      overflow:
-                                                          TextOverflow.clip,
-                                                      style: const TextStyle(
-                                                          color:
-                                                              AppColors.white,
-                                                          fontSize: 12),
-                                                    ),
-                                                  ),
-                                                  const SizedBox(
-                                                    height: 8,
-                                                  ),
-                                                  SizedBox(
-                                                    child: ElevatedButton(
-                                                      onPressed: () {
-                                                        Navigator.push(
-                                                            context,
-                                                            MaterialPageRoute(
-                                                              builder: (context) =>
-                                                                  DetailJeu(
-                                                                      title:
-                                                                          "title",
-                                                                      game: _posts[
-                                                                          0]),
-                                                            ));
-                                                      },
-                                                      style: ElevatedButton
-                                                          .styleFrom(
-                                                              backgroundColor:
-                                                                  AppColors
-                                                                      .primary),
-                                                      child: const Padding(
-                                                          padding: EdgeInsets
-                                                              .symmetric(
-                                                                  vertical: 5.0,
-                                                                  horizontal:
-                                                                      5.0),
-                                                          child: Column(
-                                                            children: [
-                                                              Text(
-                                                                "En savoir plus",
-                                                                style: TextStyle(
-                                                                    color: AppColors
-                                                                        .white,
-                                                                    fontSize:
-                                                                        15),
-                                                              ),
-                                                            ],
-                                                          )),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                          const Spacer(),
-                                          Padding(
-                                              padding: const EdgeInsets.all(16),
-                                              child: Container(
-                                                decoration: BoxDecoration(
-                                                    border: Border.all(
-                                                        width: 0.5,
-                                                        color: AppColors
-                                                            .placeholder)),
-                                                child: Image.network(
-                                                  _posts[0].imgURL,
-                                                  fit: BoxFit.cover,
-                                                  height: 150,
-                                                  width: 120,
-                                                ),
-                                              )),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                          ),
-                          const SizedBox(
-                            height: 8,
-                          ),
-                          const Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Padding(
-                                padding: EdgeInsets.only(left: 8),
-                                child: Text("Les meilleurs ventes",
-                                    textAlign: TextAlign.left,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: TextStyle(
-                                        color: AppColors.white,
-                                        fontSize: 15,
-                                        decoration: TextDecoration.underline)),
-                              ),
-                            ],
-                          ),
-                          Expanded(
-                            child: Center(
-                              child: SizedBox(
-                                  child: Column(
+              if (_isFirstLoadRunning) const Center(
+                child: CircularProgressIndicator(),
+              ) else
+                Expanded(
+                  child: Column(
+                    children: [
+
+                      Expanded(
+                        child: Center(
+                          child: SizedBox(
+                              child: Column(
                                 children: [
                                   Expanded(
                                     child: ListView.builder(
-                                      itemCount: _posts.length,
-                                      controller: _controller,
-                                      itemBuilder: (_, index) => Gamewidget(
-                                          game: _posts[index],
-                                          onTap: () {
-                                            Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      DetailJeu(
-                                                          title: "title",
-                                                          game: _posts[index]),
-                                                ));
-                                          }),
+                                        itemCount: _posts.length,
+                                        controller: _controller,
+                                        itemBuilder: (_, index) {
+                                          return index == 0 ? Column(
+                                            children: [frontitem,
+                                              const SizedBox(
+                                                height: 8,
+                                              ),
+                                              meilleurVente,
+                                            ],) : Gamewidget(
+                                              game: _posts[index],
+                                              onTap: () {
+                                                Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          DetailJeu(
+                                                              title: "title",
+                                                              game: _posts[index]),
+                                                    ));
+                                              });
+                                        }
                                     ),
                                   ),
                                   if (_isLoadMoreRunning == true)
                                     const Padding(
                                       padding:
-                                          EdgeInsets.only(top: 10, bottom: 40),
+                                      EdgeInsets.only(top: 10, bottom: 40),
                                       child: Center(
                                         child: CircularProgressIndicator(),
                                       ),
@@ -354,11 +337,11 @@ class _MyHomePageState extends State<MyHomePage> {
                                   if (_hasNextPage == false) Container(),
                                 ],
                               )),
-                            ),
-                          ),
-                        ],
+                        ),
                       ),
-                    )
+                    ],
+                  ),
+                )
             ],
           ),
         ));
