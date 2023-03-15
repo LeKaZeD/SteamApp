@@ -53,7 +53,9 @@ class _InscriptionPageState extends State<Inscription> {
     if (!username && !email && !pass) {
       try {
         final res = await AuthService(Supabase.instance.client).signUp(
-            widget.emailController.text, widget.passwordController.text);
+            widget.emailController.text,
+            widget.passwordController.text,
+            widget.usernameController.text);
         if (res.session != null) {
           Navigator.of(context).pushNamed("/home");
         }

@@ -5,7 +5,7 @@ import 'package:steam_app/domain/entities/GameDescriptionQuestion.dart';
 class TopGameRepo {
   TopGameRepo();
 
-  Future<List<gameDescriptionQuestion>> getTopGame(
+  /*Future<List<gameDescriptionQuestion>> getTopGame(
       int index, int nombre) async {
     final gametop = await RemoteAPISteam().getTopGame();
     final List<gameDescriptionQuestion> gameDescList = [];
@@ -14,6 +14,24 @@ class TopGameRepo {
           .getGame(RequestGameDescription(appid: gametop[element].appid))
           .then((value) => {gameDescList.add(value.toEntity())});
     }
+
+    return gameDescList;
+  }*/
+
+  Future<List<gameDescriptionQuestion>> getTopGame(
+      int index, int nombre) async {
+    final gametop = await RemoteAPISteam().getTopGame();
+    final api = RemoteAPISteam();
+    final List<gameDescriptionQuestion> gameDescList = [];
+
+    final endIndex = index + nombre;
+    final requests = gametop.sublist(index, endIndex).map((game) {
+      return api
+          .getGame(RequestGameDescription(appid: game.appid))
+          .then((value) => gameDescList.add(value.toEntity()));
+    });
+
+    await Future.wait(requests);
 
     return gameDescList;
   }

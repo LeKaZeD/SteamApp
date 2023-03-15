@@ -15,12 +15,13 @@ class AuthService {
     return res;
   }
 
-  Future<AuthResponse> signUp(String userEmail, String userPassword) async {
+  Future<AuthResponse> signUp(
+      String userEmail, String userPassword, String userName) async {
     final res =
         await client.auth.signUp(password: userPassword, email: userEmail);
 
     if (res.session != null) {
-      DatabaseService(client).createUser(res);
+      DatabaseService(client).createUser(res, userName);
     }
     return res;
   }

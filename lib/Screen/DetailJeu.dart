@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:steam_app/AppColors.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:steam_app/data/api/databaseService.dart';
 import 'package:steam_app/domain/entities/GameDescriptionQuestion.dart';
 import 'package:steam_app/res/app_vactorial_images.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class DetailJeu extends StatefulWidget {
   DetailJeu({super.key, required this.title, required this.game});
@@ -18,20 +20,16 @@ class _DetailJeuState extends State<DetailJeu> {
   bool isLike = false;
   bool isWish = false;
 
-  void GameLike() {
-    setState(() {
-      isLike = true;
-    });
-  }
-
   void Like() {
     if (isLike) {
+      DatabaseService(Supabase.instance.client).deletelike(widget.game.appid);
       setState(() {
         isLike = false;
       });
       ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text("${widget.game.name} enlevé des likes")));
     } else {
+      DatabaseService(Supabase.instance.client).addlike(widget.game.appid);
       setState(() {
         isLike = true;
       });
@@ -40,14 +38,16 @@ class _DetailJeuState extends State<DetailJeu> {
     }
   }
 
-  void WishList() {
+  Future<void> WishList() async {
     if (isWish) {
+      DatabaseService(Supabase.instance.client).deleteWishlist(widget.game.appid);
       setState(() {
         isWish = false;
       });
       ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text("${widget.game.name} enlevé de la Wishlist")));
     } else {
+      DatabaseService(Supabase.instance.client).addWishlist(widget.game.appid);
       setState(() {
         isWish = true;
       });
@@ -56,9 +56,17 @@ class _DetailJeuState extends State<DetailJeu> {
     }
   }
 
-  void GameWish() {
+  Future<void> GameWish() async {
+    final bool res = await DatabaseService(Supabase.instance.client).isWishlist(widget.game.appid);
     setState(() {
-      isWish = true;
+      isWish = res;
+    });
+  }
+
+  Future<void> GameLike() async {
+    final bool res = await DatabaseService(Supabase.instance.client).islike(widget.game.appid);
+    setState(() {
+      isLike = res;
     });
   }
 

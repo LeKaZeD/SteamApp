@@ -3,6 +3,7 @@ import 'package:steam_app/AppColors.dart';
 import 'package:steam_app/Screen/Component/Button.dart';
 import 'package:steam_app/Screen/Component/Input.dart';
 import 'package:steam_app/data/api/AuthService.dart';
+import 'package:steam_app/data/api/databaseService.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class Connexion extends StatefulWidget {
@@ -50,12 +51,18 @@ class _ConnexionPageState extends State<Connexion> {
   }
 
   @override
+  void initState() {
+    setState(() {});
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     Widget errorDisplay = Row(children: [
       const SizedBox(height: 100),
       Text(
         erromsg,
-        style: TextStyle(color: AppColors.error),
+        style: const TextStyle(color: AppColors.error),
       ),
       const SizedBox(height: 10)
     ]);
