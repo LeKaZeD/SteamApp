@@ -60,9 +60,13 @@ class _ConnexionPageState extends State<Connexion> {
   Widget build(BuildContext context) {
     Widget errorDisplay = Row(children: [
       const SizedBox(height: 100),
-      Text(
-        erromsg,
-        style: const TextStyle(color: AppColors.error),
+      Expanded(
+        child: Text(
+          erromsg,
+          style: const TextStyle(color: AppColors.error),
+          overflow: TextOverflow.clip,
+          textAlign: TextAlign.center,
+        ),
       ),
       const SizedBox(height: 10)
     ]);

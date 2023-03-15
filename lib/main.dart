@@ -89,10 +89,17 @@ class MyApp extends StatelessWidget {
                       controler: settings.arguments,
                     ));
           default:
-            return MaterialPageRoute(
-                builder: (context) => Connexion(
-                      title: 'App',
-                    ));
+            if (Supabase.instance.client.auth.currentSession != null) {
+              return MaterialPageRoute(
+                  builder: (context) => MyHomePage(
+                        title: 'App',
+                      ));
+            } else {
+              return MaterialPageRoute(
+                  builder: (context) => Connexion(
+                        title: 'App',
+                      ));
+            }
         }
       },
     );

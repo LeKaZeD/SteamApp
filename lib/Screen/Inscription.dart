@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:steam_app/AppColors.dart';
 import 'package:steam_app/Screen/Component/Button.dart';
@@ -22,6 +24,7 @@ class _InscriptionPageState extends State<Inscription> {
   bool username = false;
   bool email = false;
   bool pass = false;
+  bool errorSupa = false;
   String msgError = '';
 
   void Inscription() async {
@@ -50,6 +53,12 @@ class _InscriptionPageState extends State<Inscription> {
         msgError = "Les mots de passe ne sont pas pareil";
       });
     }
+    if (widget.passwordController.text.length < 5) {
+      setState(() {
+        pass = true;
+        msgError = "Votre mot de passe doit contenir au moin 5 carractère";
+      });
+    }
     if (!username && !email && !pass) {
       try {
         final res = await AuthService(Supabase.instance.client).signUp(
@@ -61,6 +70,7 @@ class _InscriptionPageState extends State<Inscription> {
         }
       } on AuthException catch (e) {
         setState(() {
+          errorSupa = true;
           msgError = e.message;
         });
       }
@@ -69,6 +79,19 @@ class _InscriptionPageState extends State<Inscription> {
 
   @override
   Widget build(BuildContext context) {
+    Widget errorDisplay = Row(children: [
+      const SizedBox(height: 100),
+      Expanded(
+        child: Text(
+          msgError,
+          style: const TextStyle(color: AppColors.error),
+          overflow: TextOverflow.clip,
+          textAlign: TextAlign.center,
+        ),
+      ),
+      const SizedBox(height: 10)
+    ]);
+
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -133,12 +156,14 @@ class _InscriptionPageState extends State<Inscription> {
                   obscureText: true,
                   error: pass,
                 ),
-                Container(
-                  constraints: const BoxConstraints(
-                    minHeight: 10,
-                    maxHeight: 50,
-                  ),
-                ),
+                (errorSupa || pass || username || email)
+                    ? errorDisplay
+                    : Container(
+                        constraints: const BoxConstraints(
+                          minHeight: 10,
+                          maxHeight: 50,
+                        ),
+                      ),
                 Button(onTap: Inscription, name: "S’inscrire"),
               ],
             ),
