@@ -19,6 +19,22 @@ class DetailJeu extends StatefulWidget {
 class _DetailJeuState extends State<DetailJeu> {
   bool isLike = false;
   bool isWish = false;
+  bool avis = false;
+  bool description = true;
+
+  void avisfun() {
+    setState(() {
+      avis = true;
+      description = false;
+    });
+  }
+
+  void descfun() {
+    setState(() {
+      avis = false;
+      description = true;
+    });
+  }
 
   void Like() {
     if (isLike) {
@@ -40,7 +56,8 @@ class _DetailJeuState extends State<DetailJeu> {
 
   Future<void> WishList() async {
     if (isWish) {
-      DatabaseService(Supabase.instance.client).deleteWishlist(widget.game.appid);
+      DatabaseService(Supabase.instance.client)
+          .deleteWishlist(widget.game.appid);
       setState(() {
         isWish = false;
       });
@@ -57,14 +74,16 @@ class _DetailJeuState extends State<DetailJeu> {
   }
 
   Future<void> GameWish() async {
-    final bool res = await DatabaseService(Supabase.instance.client).isWishlist(widget.game.appid);
+    final bool res = await DatabaseService(Supabase.instance.client)
+        .isWishlist(widget.game.appid);
     setState(() {
       isWish = res;
     });
   }
 
   Future<void> GameLike() async {
-    final bool res = await DatabaseService(Supabase.instance.client).islike(widget.game.appid);
+    final bool res = await DatabaseService(Supabase.instance.client)
+        .islike(widget.game.appid);
     setState(() {
       isLike = res;
     });
@@ -134,56 +153,95 @@ class _DetailJeuState extends State<DetailJeu> {
               )
             ])));
 
-    Widget buttonSection = Padding(
-      padding: const EdgeInsets.all(15.0),
-      child: Row(
-        children: [
-          Expanded(
-            child: ElevatedButton(
-              onHover: (event) {},
-              onPressed: () {},
-              style: ElevatedButton.styleFrom(
-                shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(8),
-                        topLeft: Radius.circular(8))),
-                backgroundColor: AppColors.primary,
-              ),
-              child: const Text(
-                "DESCRIPTION",
-                style: TextStyle(
-                  color: AppColors.white,
+    Widget buttonSection = description
+        ? Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Row(
+              children: [
+                Expanded(
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    style: ElevatedButton.styleFrom(
+                      shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.only(
+                              bottomLeft: Radius.circular(8),
+                              topLeft: Radius.circular(8))),
+                      backgroundColor: AppColors.primary,
+                    ),
+                    child: const Text(
+                      "DESCRIPTION",
+                      style: TextStyle(
+                        color: AppColors.white,
+                      ),
+                    ),
+                  ),
                 ),
-              ),
-            ),
-          ),
-          Expanded(
-            child: ElevatedButton(
-              onHover: (event) {},
-              onPressed: () {},
-              style: ElevatedButton.styleFrom(
-                  shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.only(
-                          bottomRight: Radius.circular(8),
-                          topRight: Radius.circular(8))),
-                  backgroundColor: AppColors.background.withOpacity(1.0),
-                  side: const BorderSide(color: AppColors.primary)),
-              child: const Text(
-                "AVIS",
-                style: TextStyle(
-                  color: AppColors.white,
-                ),
-              ),
+                Expanded(
+                  child: ElevatedButton(
+                    onPressed: avisfun,
+                    style: ElevatedButton.styleFrom(
+                        shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.only(
+                                bottomRight: Radius.circular(8),
+                                topRight: Radius.circular(8))),
+                        backgroundColor: AppColors.background.withOpacity(1.0),
+                        side: const BorderSide(color: AppColors.primary)),
+                    child: const Text(
+                      "AVIS",
+                      style: TextStyle(
+                        color: AppColors.white,
+                      ),
+                    ),
+                  ),
+                )
+              ],
             ),
           )
-        ],
-      ),
-      //_buildButtonColumn(ColoredBox(color: Colors.red), "DESCRIPTION"),
-    );
+        : Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Row(
+              children: [
+                Expanded(
+                  child: ElevatedButton(
+                    onPressed: descfun,
+                    style: ElevatedButton.styleFrom(
+                        shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.only(
+                                bottomLeft: Radius.circular(8),
+                                topLeft: Radius.circular(8))),
+                        backgroundColor: AppColors.background.withOpacity(1.0),
+                        side: const BorderSide(color: AppColors.primary)),
+                    child: const Text(
+                      "DESCRIPTION",
+                      style: TextStyle(
+                        color: AppColors.white,
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    style: ElevatedButton.styleFrom(
+                        shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.only(
+                                bottomRight: Radius.circular(8),
+                                topRight: Radius.circular(8))),
+                        backgroundColor: AppColors.primary),
+                    child: const Text(
+                      "AVIS",
+                      style: TextStyle(
+                        color: AppColors.white,
+                      ),
+                    ),
+                  ),
+                )
+              ],
+            ));
 
     Widget descriptionSection = Padding(
       padding:
-          const EdgeInsets.only(left: 15.0, top: 0.0, right: 15.0, bottom: 0.0),
+          const EdgeInsets.only(left: 16.0, top: 0.0, right: 16.0, bottom: 0.0),
       child: Text(
         widget.game.description,
         style: const TextStyle(
@@ -192,6 +250,11 @@ class _DetailJeuState extends State<DetailJeu> {
             fontSize: 15,
             color: AppColors.white),
       ),
+    );
+
+    Widget avisSection = Padding(
+      padding: const EdgeInsets.only(left: 16, right: 16),
+      child: Text('avis'),
     );
 
     Widget imageSection = Image.network(
@@ -221,22 +284,29 @@ class _DetailJeuState extends State<DetailJeu> {
         ),
         body: ListView(
           children: [
-            Stack(
-              clipBehavior: Clip.antiAlias,
+            Column(
               children: [
-                imageSection,
-                Positioned.fill(
-                  top: 290,
-                  child: Wrap(
+                Container(
+                  height: 430,
+                  child: Stack(
+                    clipBehavior: Clip.antiAlias,
                     children: [
-                      titleSection,
-                      buttonSection,
-                      descriptionSection,
+                      imageSection,
+                      Positioned.fill(
+                        top: 290,
+                        child: Wrap(
+                          children: [
+                            titleSection,
+                          ],
+                        ),
+                      ),
                     ],
                   ),
-                )
+                ),
+                buttonSection,
+                description ? descriptionSection : avisSection,
               ],
-            )
+            ),
           ],
         ));
   }
