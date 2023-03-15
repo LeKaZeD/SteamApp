@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:steam_app/Screen/Connexion.dart';
 import 'package:steam_app/Screen/DetailJeu.dart';
-import 'package:steam_app/Screen/LikesvidesWidget.dart';
+import 'package:steam_app/Screen/Likes.dart';
 import 'package:steam_app/Screen/Search.dart';
-import 'package:steam_app/Screen/WhishlistVide.dart';
+import 'package:steam_app/Screen/Wishlist.dart';
 import 'package:steam_app/domain/entities/GameDescriptionQuestion.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 

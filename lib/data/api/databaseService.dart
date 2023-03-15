@@ -26,14 +26,14 @@ class DatabaseService {
         .select('wish')
         .eq('id', client.auth.currentSession?.user.id)
         .single() as Map;
-    final List<gameDescriptionQuestion> gameDescList = [];
-    final requests = data['wish'].map((game) {
+    final List<dynamic> array = data['wish'];
+    final List<Future<gameDescriptionQuestion>> futures = array.map((element) {
       return RemoteAPISteam()
-          .getGame(RequestGameDescription(appid: game))
-          .then((value) => gameDescList.add(value.toEntity()));
-    });
-    await Future.wait(requests);
-    return gameDescList;
+          .getGame(RequestGameDescription(appid: element))
+          .then((value) => value.toEntity());
+    }).toList();
+    final results = await Future.wait(futures);
+    return results;
   }
 
   //savoir si un jeux fait partie de la wishlist
@@ -87,14 +87,14 @@ class DatabaseService {
         .select('like')
         .eq('id', client.auth.currentSession?.user.id)
         .single() as Map;
-    final List<gameDescriptionQuestion> gameDescList = [];
-    final requests = data['like'].map((game) {
+    final List<dynamic> array = data['like'];
+    final List<Future<gameDescriptionQuestion>> futures = array.map((element) {
       return RemoteAPISteam()
-          .getGame(RequestGameDescription(appid: game))
-          .then((value) => gameDescList.add(value.toEntity()));
-    });
-    await Future.wait(requests);
-    return gameDescList;
+          .getGame(RequestGameDescription(appid: element))
+          .then((value) => value.toEntity());
+    }).toList();
+    final results = await Future.wait(futures);
+    return results;
   }
 
   //savoir si un jeux fait partie de la wishlist
