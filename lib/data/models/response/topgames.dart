@@ -1,4 +1,3 @@
-import 'package:steam_app/data/models/response/GameDescription.dart';
 import 'package:steam_app/domain/entities/topgame_question.dart';
 
 class topGame {

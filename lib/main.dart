@@ -1,15 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:steam_app/Screen/Connexion.dart';
 import 'package:steam_app/Screen/DetailJeu.dart';
-import 'package:steam_app/Screen/LikesvidesWidget.dart';
+import 'package:steam_app/Screen/Likes.dart';
 import 'package:steam_app/Screen/Search.dart';
-import 'package:steam_app/Screen/WhishlistVide.dart';
+import 'package:steam_app/Screen/Wishlist.dart';
 import 'package:steam_app/domain/entities/GameDescriptionQuestion.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 import 'Screen/HomePage.dart';
 import 'Screen/Inscription.dart';
 
-void main() {
+/*void main() {
+  runApp(const MyApp());
+}*/
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Supabase.initialize(
+    url: 'https://zlnujbmqmuejpvyuphcf.supabase.co',
+    anonKey:
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpsbnVqYm1xbXVlanB2eXVwaGNmIiwicm9sZSI6ImFub24iLCJpYXQiOjE2Nzg2NjAzMzQsImV4cCI6MTk5NDIzNjMzNH0.Q9UpBnOlMfdPOy7wQ4Ov2YA2aBf6FzgYCOTL3tYtgDk',
+  );
+  //Supabase.instance.client.auth.signOut();
   runApp(const MyApp());
 }
 
@@ -72,12 +84,22 @@ class MyApp extends StatelessWidget {
                         game: Navigator.of(context).pop(""),
                       ));*/
           case "/Search":
-            return MaterialPageRoute(builder: (context) => Search());
-          default:
             return MaterialPageRoute(
-                builder: (context) => Connexion(
-                      title: 'App',
+                builder: (context) => Search(
+                      controler: settings.arguments,
                     ));
+          default:
+            if (Supabase.instance.client.auth.currentSession != null) {
+              return MaterialPageRoute(
+                  builder: (context) => MyHomePage(
+                        title: 'App',
+                      ));
+            } else {
+              return MaterialPageRoute(
+                  builder: (context) => Connexion(
+                        title: 'App',
+                      ));
+            }
         }
       },
     );
