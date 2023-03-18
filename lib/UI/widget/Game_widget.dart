@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:steam_app/AppColors.dart';
 import 'package:steam_app/domain/entities/GameDescriptionQuestion.dart';
-
-import '../AppColors.dart';
 
 class Gamewidget extends StatelessWidget {
   final gameDescriptionQuestion game;

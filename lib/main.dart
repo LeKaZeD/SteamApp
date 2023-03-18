@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:steam_app/Screen/Connexion.dart';
-import 'package:steam_app/Screen/DetailJeu.dart';
-import 'package:steam_app/Screen/Likes.dart';
-import 'package:steam_app/Screen/Search.dart';
-import 'package:steam_app/Screen/Wishlist.dart';
-import 'package:steam_app/domain/entities/GameDescriptionQuestion.dart';
+import 'package:steam_app/UI/Screen/Connexion.dart';
+import 'package:steam_app/UI/Screen/HomePage.dart';
+import 'package:steam_app/UI/Screen/Inscription.dart';
+import 'package:steam_app/UI/Screen/Likes.dart';
+import 'package:steam_app/UI/Screen/Search.dart';
+import 'package:steam_app/UI/Screen/Wishlist.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-
-import 'Screen/HomePage.dart';
-import 'Screen/Inscription.dart';
 
 /*void main() {
   runApp(const MyApp());

@@ -2,11 +2,11 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:steam_app/AppColors.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:steam_app/Screen/Component/Input.dart';
-import 'package:steam_app/Screen/DetailJeu.dart';
+import 'package:steam_app/UI/Component/Input.dart';
+import 'package:steam_app/UI/Screen/DetailJeu.dart';
+import 'package:steam_app/UI/widget/Game_widget.dart';
 import 'package:steam_app/domain/repo/gameNameRepro.dart';
 import 'package:steam_app/res/app_vactorial_images.dart';
-import 'package:steam_app/widget/Game_widget.dart';
 
 class Search extends StatefulWidget {
   final controler;

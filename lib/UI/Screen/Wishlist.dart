@@ -1,26 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:steam_app/AppColors.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:steam_app/Screen/DetailJeu.dart';
+import 'package:steam_app/UI/Screen/DetailJeu.dart';
+import 'package:steam_app/UI/widget/Game_widget.dart';
 import 'package:steam_app/data/api/databaseService.dart';
 import 'package:steam_app/res/app_vactorial_images.dart';
-import 'package:steam_app/widget/Game_widget.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-class LikesvidesWidget extends StatefulWidget {
-  const LikesvidesWidget({super.key});
+class WhishlistVide extends StatefulWidget {
+  const WhishlistVide({super.key});
 
   @override
-  _LikesvidesWidgetState createState() => _LikesvidesWidgetState();
+  _WhishlistVideState createState() => _WhishlistVideState();
 }
 
-class _LikesvidesWidgetState extends State<LikesvidesWidget> {
+class _WhishlistVideState extends State<WhishlistVide> {
   bool empty = true;
   bool loading = true;
   List _posts = [];
 
   void setlike() async {
-    final res = await DatabaseService(Supabase.instance.client).getLike();
+    final res = await DatabaseService(Supabase.instance.client).getWishlist();
     if (res.isNotEmpty) {
       setState(() {
         empty = false;
@@ -43,32 +43,20 @@ class _LikesvidesWidgetState extends State<LikesvidesWidget> {
 
   late ScrollController _controller = ScrollController();
 
-  @override
-  Widget build(BuildContext context) {
-    Widget emptyContainer = Container(
-        alignment: Alignment.center,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(
-                  left: 0.0, top: 250.0, right: 0.0, bottom: 50.0),
-              child: SvgPicture.asset(AppVactorialImages.emptyLikes),
-            ),
-            const Padding(
-              padding: EdgeInsets.all(10.0),
-              child: Text(
-                'Vous n’avez encore pas liké de contenu.',
-                style: TextStyle(
-                    fontFamily: 'Proxima Nova',
-                    fontWeight: FontWeight.normal,
-                    fontSize: 15,
-                    color: AppColors.white),
-                textAlign: TextAlign.center,
-              ),
-            ),
-            const Text(
-              'Cliquez sur le coeur pour en rajouter.',
+  Widget emptyContainer = Container(
+      alignment: Alignment.center,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(
+                left: 0.0, top: 250.0, right: 0.0, bottom: 50.0),
+            child: SvgPicture.asset(AppVactorialImages.emptyWhishlist),
+          ),
+          const Padding(
+            padding: EdgeInsets.all(10.0),
+            child: Text(
+              'Vous n’avez encore pas liké de contenu.',
               style: TextStyle(
                   fontFamily: 'Proxima Nova',
                   fontWeight: FontWeight.normal,
@@ -76,14 +64,26 @@ class _LikesvidesWidgetState extends State<LikesvidesWidget> {
                   color: AppColors.white),
               textAlign: TextAlign.center,
             ),
-          ],
-        ));
+          ),
+          const Text(
+            'Cliquez sur l’étoile pour en rajouter.',
+            style: TextStyle(
+                fontFamily: 'Proxima Nova',
+                fontWeight: FontWeight.normal,
+                fontSize: 15,
+                color: AppColors.white),
+            textAlign: TextAlign.center,
+          ),
+        ],
+      ));
 
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.background,
       appBar: AppBar(
         backgroundColor: AppColors.background,
-        title: const Text("Mes Likes"),
+        title: const Text("Ma liste de souhaits"),
       ),
       body: loading
           ? const Center(
