@@ -8,10 +8,9 @@ import 'package:steam_app/res/app_vactorial_images.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class DetailJeu extends StatefulWidget {
-  DetailJeu({super.key, required this.title, required this.game});
+  DetailJeu({super.key, required this.game});
 
   final gameDescriptionQuestion game;
-  final String title;
 
   @override
   State<DetailJeu> createState() => _DetailJeuState();

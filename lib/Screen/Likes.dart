@@ -8,9 +8,7 @@ import 'package:steam_app/widget/Game_widget.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class LikesvidesWidget extends StatefulWidget {
-  const LikesvidesWidget({super.key, required this.title});
-
-  final String title;
+  const LikesvidesWidget({super.key});
 
   @override
   _LikesvidesWidgetState createState() => _LikesvidesWidgetState();
@@ -108,7 +106,6 @@ class _LikesvidesWidgetState extends State<LikesvidesWidget> {
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) => DetailJeu(
-                                      title: "title",
                                       game: _posts[index],
                                     ),
                                   ),

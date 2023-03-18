@@ -8,9 +8,7 @@ import 'package:steam_app/widget/Game_widget.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class WhishlistVide extends StatefulWidget {
-  const WhishlistVide({super.key, required this.title});
-
-  final String title;
+  const WhishlistVide({super.key});
 
   @override
   _WhishlistVideState createState() => _WhishlistVideState();
@@ -108,7 +106,6 @@ class _WhishlistVideState extends State<WhishlistVide> {
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) => DetailJeu(
-                                      title: "title",
                                       game: _posts[index],
                                     ),
                                   ),

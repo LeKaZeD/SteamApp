@@ -104,7 +104,6 @@ class _Search extends State<Search> {
                                                 MaterialPageRoute(
                                                   builder: (context) =>
                                                       DetailJeu(
-                                                          title: "title",
                                                           game: _posts[index]),
                                                 ));
                                           }),

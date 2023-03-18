@@ -21,7 +21,6 @@ Future<void> main() async {
     anonKey:
         'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpsbnVqYm1xbXVlanB2eXVwaGNmIiwicm9sZSI6ImFub24iLCJpYXQiOjE2Nzg2NjAzMzQsImV4cCI6MTk5NDIzNjMzNH0.Q9UpBnOlMfdPOy7wQ4Ov2YA2aBf6FzgYCOTL3tYtgDk',
   );
-  //Supabase.instance.client.auth.signOut();
   runApp(const MyApp());
 }
 
@@ -50,39 +49,17 @@ class MyApp extends StatelessWidget {
       onGenerateRoute: (settings) {
         switch (settings.name) {
           case "/home":
-            return MaterialPageRoute(
-                builder: (context) => MyHomePage(
-                      title: 'App',
-                    ));
+            return MaterialPageRoute(builder: (context) => MyHomePage());
           case "/login":
-            return MaterialPageRoute(
-                builder: (context) => Connexion(
-                      title: 'login',
-                    ));
+            return MaterialPageRoute(builder: (context) => Connexion());
           case "/inscription":
-            return MaterialPageRoute(
-                builder: (context) => Inscription(
-                      title: 'inscription',
-                    ));
+            return MaterialPageRoute(builder: (context) => Inscription());
           case "/whishlist":
-            //return MaterialPageRoute(builder: (context) => whishlist());
             return MaterialPageRoute(
-                builder: (context) => const WhishlistVide(
-                      title: 'Ma liste de souhaits',
-                    ));
-
+                builder: (context) => const WhishlistVide());
           case "/like":
             return MaterialPageRoute(
-                builder: (context) => const LikesvidesWidget(
-                      title: 'like',
-                    ));
-
-          case "/Detail":
-          /*return MaterialPageRoute(
-                  builder: (context) => DetailJeu(
-                        title: 'Détail du jeu',
-                        game: Navigator.of(context).pop(""),
-                      ));*/
+                builder: (context) => const LikesvidesWidget());
           case "/Search":
             return MaterialPageRoute(
                 builder: (context) => Search(
@@ -90,15 +67,9 @@ class MyApp extends StatelessWidget {
                     ));
           default:
             if (Supabase.instance.client.auth.currentSession != null) {
-              return MaterialPageRoute(
-                  builder: (context) => MyHomePage(
-                        title: 'App',
-                      ));
+              return MaterialPageRoute(builder: (context) => MyHomePage());
             } else {
-              return MaterialPageRoute(
-                  builder: (context) => Connexion(
-                        title: 'App',
-                      ));
+              return MaterialPageRoute(builder: (context) => Connexion());
             }
         }
       },

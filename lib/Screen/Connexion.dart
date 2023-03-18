@@ -6,9 +6,8 @@ import 'package:steam_app/data/api/AuthService.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class Connexion extends StatefulWidget {
-  Connexion({super.key, required this.title});
+  Connexion({super.key});
 
-  final String title;
   final EmailController = TextEditingController();
   final passwordController = TextEditingController();
 

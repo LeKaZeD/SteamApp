@@ -6,9 +6,8 @@ import 'package:steam_app/data/api/AuthService.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class Inscription extends StatefulWidget {
-  Inscription({super.key, required this.title});
+  Inscription({super.key});
 
-  final String title;
   final usernameController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
