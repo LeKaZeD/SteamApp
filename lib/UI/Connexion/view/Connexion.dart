@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:steam_app/AppColors.dart';
 import 'package:steam_app/UI/Component/Button.dart';
 import 'package:steam_app/UI/Component/Input.dart';
-import 'package:steam_app/UI/ScreenController/ConnexionBlock.dart';
+import 'package:steam_app/UI/Connexion/bloc/ConnexionBlock.dart';
 import 'package:steam_app/data/api/AuthService.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

@@ -74,10 +74,10 @@ class Gamewidget extends StatelessWidget {
                       onPressed: onTap,
                       style: ElevatedButton.styleFrom(
                           backgroundColor: AppColors.primary),
-                      child: const Padding(
-                          padding: EdgeInsets.symmetric(vertical: 39.0),
+                      child: Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 39.0),
                           child: Column(
-                            children: [
+                            children: const [
                               Text(
                                 "En savoir",
                                 style: TextStyle(

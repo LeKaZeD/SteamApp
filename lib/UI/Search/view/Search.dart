@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:steam_app/AppColors.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:steam_app/UI/Component/Input.dart';
-import 'package:steam_app/UI/Screen/DetailJeu.dart';
-import 'package:steam_app/UI/widget/Game_widget.dart';
+import 'package:steam_app/UI/Component/widget/Game_widget.dart';
+import 'package:steam_app/UI/DetailJeu/view/DetailJeu.dart';
 import 'package:steam_app/domain/repo/gameNameRepro.dart';
 import 'package:steam_app/res/app_vactorial_images.dart';
 

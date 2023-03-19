@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:steam_app/AppColors.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:steam_app/UI/Component/Input.dart';
-import 'package:steam_app/UI/Screen/DetailJeu.dart';
-import 'package:steam_app/UI/widget/Game_widget.dart';
+import 'package:steam_app/UI/Component/widget/Game_widget.dart';
+import 'package:steam_app/UI/DetailJeu/view/DetailJeu.dart';
 import 'package:steam_app/data/api/AuthService.dart';
 import 'package:steam_app/domain/entities/GameDescriptionQuestion.dart';
 import 'package:steam_app/domain/repo/TopGameRepo.dart';
@@ -182,11 +182,11 @@ class _MyHomePageState extends State<MyHomePage> {
                                 },
                                 style: ElevatedButton.styleFrom(
                                     backgroundColor: AppColors.primary),
-                                child: const Padding(
-                                    padding: EdgeInsets.symmetric(
+                                child: Padding(
+                                    padding: const EdgeInsets.symmetric(
                                         vertical: 5.0, horizontal: 5.0),
                                     child: Column(
-                                      children: [
+                                      children: const [
                                         Text(
                                           "En savoir plus",
                                           style: TextStyle(
@@ -221,10 +221,10 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
     );
 
-    Widget meilleurVente = const Row(
+    Widget meilleurVente = Row(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
+      children: const [
         Padding(
           padding: EdgeInsets.only(left: 8),
           child: Text("Les meilleurs ventes",
