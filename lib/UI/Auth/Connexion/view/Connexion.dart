@@ -8,6 +8,7 @@ import 'package:steam_app/UI/Auth/Connexion/bloc/ConnexionState.dart';
 import 'package:steam_app/UI/Auth/FormSubmissionStatus.dart';
 import 'package:steam_app/UI/Component/Button.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:steam_app/resources/resources.dart';
 
 class Connexion extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
@@ -19,13 +20,31 @@ class Connexion extends StatelessWidget {
       child: Scaffold(
         backgroundColor: AppColors.background,
         appBar: AppBar(
+          flexibleSpace: Container(
+            decoration: BoxDecoration(
+              color: AppColors.input,
+              image: DecorationImage(
+                  fit: BoxFit.cover,
+                  colorFilter: ColorFilter.mode(
+                      AppColors.background.withOpacity(1.0), BlendMode.dstATop),
+                  image: AssetImage(Images.bgPattern)),
+            ),
+          ),
           elevation: 0,
-          backgroundColor: AppColors.background,
+          backgroundColor: Colors.transparent,
           automaticallyImplyLeading: false,
         ),
         body: Container(
+          decoration: BoxDecoration(
+            color: AppColors.input,
+            image: DecorationImage(
+                fit: BoxFit.cover,
+                colorFilter: ColorFilter.mode(
+                    AppColors.background.withOpacity(1.0), BlendMode.dstATop),
+                image: AssetImage(Images.bgPattern)),
+          ),
           alignment: Alignment.topCenter,
-          margin: const EdgeInsets.only(left: 20, right: 20),
+          margin: const EdgeInsets.only(left: 0, right: 0),
           child: SizedBox(
             width: 330,
             child: Column(

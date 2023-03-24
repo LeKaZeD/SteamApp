@@ -5,6 +5,7 @@ import 'package:steam_app/resources/resources.dart';
 
 void main() {
   test('app_vactorial_images assets test', () {
+    expect(File(AppVactorialImages.bgPattern).existsSync(), true);
     expect(File(AppVactorialImages.back).existsSync(), true);
     expect(File(AppVactorialImages.close).existsSync(), true);
     expect(File(AppVactorialImages.emptyLikes).existsSync(), true);

@@ -7,6 +7,7 @@ import 'package:steam_app/UI/Auth/Inscription/bloc/InscriptionBloc.dart';
 import 'package:steam_app/UI/Auth/Inscription/bloc/InscriptionEvent.dart';
 import 'package:steam_app/UI/Auth/Inscription/bloc/InscriptionState.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:steam_app/resources/resources.dart';
 
 class Inscription extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
@@ -17,16 +18,35 @@ class Inscription extends StatelessWidget {
         create: (_) => InscriptionBloc(authCubit: context.read<AuthCubit>()),
         child: Scaffold(
           appBar: AppBar(
+            flexibleSpace: Container(
+              decoration: BoxDecoration(
+                color: AppColors.input,
+                image: DecorationImage(
+                    fit: BoxFit.cover,
+                    colorFilter: ColorFilter.mode(
+                        AppColors.background.withOpacity(1.0),
+                        BlendMode.dstATop),
+                    image: AssetImage(Images.bgPattern)),
+              ),
+            ),
             leading: IconButton(
                 onPressed: () => context.read<AuthCubit>().showLogin(),
                 icon: const Icon(Icons.arrow_back)),
             elevation: 0,
-            backgroundColor: AppColors.background,
+            backgroundColor: Colors.transparent,
           ),
           backgroundColor: AppColors.background,
           body: Container(
             alignment: Alignment.topCenter,
-            margin: const EdgeInsets.only(left: 20, right: 20),
+            margin: const EdgeInsets.only(left: 0, right: 0),
+            decoration: BoxDecoration(
+              color: AppColors.input,
+              image: DecorationImage(
+                  fit: BoxFit.cover,
+                  colorFilter: ColorFilter.mode(
+                      AppColors.background.withOpacity(1.0), BlendMode.dstATop),
+                  image: AssetImage(Images.bgPattern)),
+            ),
             child: SizedBox(width: 330, child: FormSignUp()),
           ),
         ));

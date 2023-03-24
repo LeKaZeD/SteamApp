@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:steam_app/UI/MyApp/bloc/SessionState.dart';
+import 'package:steam_app/data/api/AuthService.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class SessionsCubit extends Cubit<SessionState> {
@@ -26,6 +27,7 @@ class SessionsCubit extends Cubit<SessionState> {
   }
 
   void signOut() {
+    AuthService(Supabase.instance.client).signOut();
     emit(Unauthenticated());
   }
 }
