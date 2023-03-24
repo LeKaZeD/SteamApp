@@ -35,7 +35,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void logout() {
     AuthService(Supabase.instance.client).signOut();
-    Navigator.of(context).pushNamed("login");
+    Navigator.of(context).pushNamed("/login");
   }
 
   int _page = 0;
@@ -114,13 +114,115 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
-    Widget frontitem = SizedBox(
+    return Scaffold(
+        appBar: AppBar(
+          // Here we take the value from the MyHomePage object that was created by
+          // the App.build method, and use it to set our appbar title.
+          title: const Text("Accueil"),
+          backgroundColor: AppColors.background,
+          automaticallyImplyLeading: false,
+          actions: <Widget>[
+            IconButton(
+                onPressed: Like,
+                icon: SvgPicture.asset(AppVactorialImages.like)),
+            IconButton(
+                onPressed: WhishList,
+                icon: SvgPicture.asset(AppVactorialImages.whishlist)),
+            IconButton(
+                onPressed: logout, icon: const Icon(Icons.logout_outlined))
+          ],
+          //leading: Container(),
+        ),
+        body: Container(
+          color: AppColors.background,
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8),
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        const SizedBox(height: 10),
+                        MyTextFieldResearch(
+                            controler: widget.search,
+                            hintText: "Rechercher un jeu...",
+                            obscureText: false,
+                            formKey: _formKey,
+                            action: () {
+                              Navigator.of(context).pushNamed("/Search",
+                                  arguments: widget.search);
+                            }),
+                        const SizedBox(height: 10),
+                      ]),
+                ),
+              ),
+              if (_isFirstLoadRunning)
+                const Center(
+                  child: CircularProgressIndicator(),
+                )
+              else
+                Expanded(
+                  child: Column(
+                    children: [
+                      Expanded(
+                        child: Center(
+                          child: SizedBox(
+                              child: Column(
+                            children: [
+                              Expanded(
+                                child: ListView.builder(
+                                    itemCount: _posts.length,
+                                    controller: _controller,
+                                    itemBuilder: (_, index) {
+                                      return index == 0
+                                          ? Column(
+                                              children: [
+                                                frontitem(),
+                                                const SizedBox(
+                                                  height: 8,
+                                                ),
+                                                meilleurVente(),
+                                              ],
+                                            )
+                                          : Gamewidget(
+                                              game: _posts[index],
+                                              onTap: () {
+                                                Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          DetailJeu(
+                                                              game: _posts[
+                                                                  index]),
+                                                    ));
+                                              });
+                                    }),
+                              ),
+                              if (_isLoadMoreRunning == true)
+                                const Padding(
+                                  padding: EdgeInsets.only(top: 10, bottom: 40),
+                                  child: Center(
+                                    child: CircularProgressIndicator(),
+                                  ),
+                                ),
+                              if (_hasNextPage == false) Container(),
+                            ],
+                          )),
+                        ),
+                      ),
+                    ],
+                  ),
+                )
+            ],
+          ),
+        ));
+  }
+
+  Widget frontitem() {
+    return SizedBox(
       height: 250,
       child: _isFirstLoadRunning
           ? Container()
@@ -220,11 +322,13 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
     );
+  }
 
-    Widget meilleurVente = Row(
+  Widget meilleurVente() {
+    return const Row(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: const [
+      children: [
         Padding(
           padding: EdgeInsets.only(left: 8),
           child: Text("Les meilleurs ventes",
@@ -237,111 +341,5 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ],
     );
-
-    return Scaffold(
-        appBar: AppBar(
-          // Here we take the value from the MyHomePage object that was created by
-          // the App.build method, and use it to set our appbar title.
-          title: const Text("Accueil"),
-          backgroundColor: AppColors.background,
-          automaticallyImplyLeading: false,
-          actions: <Widget>[
-            IconButton(
-                onPressed: Like,
-                icon: SvgPicture.asset(AppVactorialImages.like)),
-            IconButton(
-                onPressed: WhishList,
-                icon: SvgPicture.asset(AppVactorialImages.whishlist)),
-            IconButton(
-                onPressed: logout, icon: const Icon(Icons.logout_outlined))
-          ],
-          //leading: Container(),
-        ),
-        body: Container(
-          color: AppColors.background,
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(8),
-                child: Form(
-                  key: _formKey,
-                  child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        const SizedBox(height: 10),
-                        MyTextFieldResearch(
-                            controler: widget.search,
-                            hintText: "Rechercher un jeu...",
-                            obscureText: false,
-                            formKey: _formKey,
-                            action: () {
-                              Navigator.of(context).pushNamed("/Search",
-                                  arguments: widget.search);
-                            }),
-                        const SizedBox(height: 10),
-                      ]),
-                ),
-              ),
-              if (_isFirstLoadRunning)
-                const Center(
-                  child: CircularProgressIndicator(),
-                )
-              else
-                Expanded(
-                  child: Column(
-                    children: [
-                      Expanded(
-                        child: Center(
-                          child: SizedBox(
-                              child: Column(
-                            children: [
-                              Expanded(
-                                child: ListView.builder(
-                                    itemCount: _posts.length,
-                                    controller: _controller,
-                                    itemBuilder: (_, index) {
-                                      return index == 0
-                                          ? Column(
-                                              children: [
-                                                frontitem,
-                                                const SizedBox(
-                                                  height: 8,
-                                                ),
-                                                meilleurVente,
-                                              ],
-                                            )
-                                          : Gamewidget(
-                                              game: _posts[index],
-                                              onTap: () {
-                                                Navigator.push(
-                                                    context,
-                                                    MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          DetailJeu(
-                                                              game: _posts[
-                                                                  index]),
-                                                    ));
-                                              });
-                                    }),
-                              ),
-                              if (_isLoadMoreRunning == true)
-                                const Padding(
-                                  padding: EdgeInsets.only(top: 10, bottom: 40),
-                                  child: Center(
-                                    child: CircularProgressIndicator(),
-                                  ),
-                                ),
-                              if (_hasNextPage == false) Container(),
-                            ],
-                          )),
-                        ),
-                      ),
-                    ],
-                  ),
-                )
-            ],
-          ),
-        ));
   }
 }

@@ -24,7 +24,6 @@ class MyTextField extends StatelessWidget {
             ],
             validator: (val) =>
                 val!.isEmpty ? "Veuiller remplir ce champ" : null,
-            controller: controler,
             obscureText: obscureText,
             textAlign: TextAlign.center,
             cursorColor: AppColors.white,
@@ -55,7 +54,6 @@ class MyTextField extends StatelessWidget {
             ],
             validator: (val) =>
                 val!.isEmpty ? "Veuiller remplir ce champ" : null,
-            controller: controler,
             obscureText: obscureText,
             textAlign: TextAlign.center,
             cursorColor: AppColors.white,

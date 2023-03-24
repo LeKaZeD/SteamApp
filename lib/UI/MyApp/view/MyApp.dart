@@ -1,19 +1,50 @@
 import 'package:flutter/material.dart';
-import 'package:steam_app/UI/Connexion/view/Connexion.dart';
-import 'package:steam_app/UI/Home/view/HomePage.dart';
-import 'package:steam_app/UI/Inscription/view/Inscription.dart';
-import 'package:steam_app/UI/Likes/view/Likes.dart';
-import 'package:steam_app/UI/Search/view/Search.dart';
-import 'package:steam_app/UI/Wishlist/view/Wishlist.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:steam_app/UI/MyApp/bloc/SessionCubit.dart';
+import 'package:steam_app/UI/MyApp/bloc/appNavigator.dart';
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  MyApp({super.key});
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+        fontFamily: 'GoogleSans',
+      ),
+      /*onGenerateRoute: (settings) {
+          switch (settings.name) {
+            case "/":
+              return MaterialPageRoute(builder: (_) => MyHomePage());
+            case "/login":
+              return MaterialPageRoute(builder: (_) => Connexion());
+            case "/inscription":
+              return MaterialPageRoute(builder: (_) => Inscription());
+            case "/whishlist":
+              return MaterialPageRoute(builder: (_) => const WhishlistVide());
+            case "/like":
+              return MaterialPageRoute(
+                  builder: (_) => const LikesvidesWidget());
+            case "/Search":
+              return MaterialPageRoute(
+                  builder: (_) => Search(
+                        controler: settings.arguments,
+                      ));
+            default:
+              return null;
+          }
+        },*/
+      home: BlocProvider(
+        create: (context) => SessionsCubit(),
+        child: AppNavigator(),
+      ),
+    );
+
+    /*return MaterialApp(
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
@@ -47,6 +78,6 @@ class MyApp extends StatelessWidget {
             }
         }
       },
-    );
+    );*/
   }
 }
