@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:steam_app/AppColors.dart';
+import 'package:steam_app/resources/AppColors.dart';
 
 class MyTextField extends StatelessWidget {
   final controler;

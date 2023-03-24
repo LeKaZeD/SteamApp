@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:steam_app/AppColors.dart';
+import 'package:steam_app/resources/AppColors.dart';
 
 class Button extends StatelessWidget {
   final Function()? onTap;

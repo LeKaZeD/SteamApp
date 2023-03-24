@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:steam_app/AppColors.dart';
+import 'package:steam_app/resources/AppColors.dart';
 import 'package:steam_app/UI/Auth/AuthCubit.dart';
 import 'package:steam_app/UI/Auth/Connexion/bloc/ConnexionBlock.dart';
 import 'package:steam_app/UI/Auth/Connexion/bloc/ConnexionEvent.dart';

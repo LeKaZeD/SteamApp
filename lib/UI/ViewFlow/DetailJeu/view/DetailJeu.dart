@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:steam_app/AppColors.dart';
+import 'package:steam_app/resources/AppColors.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:steam_app/UI/ViewFlow/DetailJeu/bloc/DetailJeuBloc.dart';
 import 'package:steam_app/UI/ViewFlow/DetailJeu/bloc/DetailJeuEvent.dart';
