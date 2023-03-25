@@ -57,7 +57,7 @@ class InscriptionBloc extends Bloc<InscriptionEvent, InscriptionState> {
     } on AuthException catch (e) {
       emit(state.copyWith(
           errorSupa: true,
-          erromsg: e.message,
+          erromsg: "L'e-mail n'existe pas ou est déjà inscrit",
           formStatus: SubmissionFailed(e)));
     }
   }

@@ -41,7 +41,7 @@ class ConnexionBloc extends Bloc<ConnexionEvent, ConnexionState> {
     } on AuthException catch (e) {
       emit(state.copyWith(
           errorSupa: true,
-          erromsg: e.message,
+          erromsg: "Combinaisons e-mail mot de passe incorrect",
           formStatus: SubmissionFailed(e)));
     }
   }
