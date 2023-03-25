@@ -51,9 +51,10 @@ dev_dependencies:
   cupertino_icons: ^1.0.2
   flutter_svg: ^1.1.6
   http: ^0.13.5
-  hooks_riverpod: ^2.3.0
-  loading_animation_widget:
+  loading_animation_widget: any
   supabase_flutter: ^1.5.0
+  flutter_bloc: any
+  spider:
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -76,8 +77,10 @@ flutter:
     - assets/icon/warning.svg
     - assets/icon/whishlist.svg
     - assets/icon/whishlist_full.svg
+    - assets/icon/Bg_Pattern.svg
     - assets/png/Jacket.jpg
     - assets/png/share.jpg
+    - assets/png/Bg_Pattern.png
 
   fonts:
     - family: GoogleSans

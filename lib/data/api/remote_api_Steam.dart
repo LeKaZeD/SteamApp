@@ -7,9 +7,6 @@ import 'package:steam_app/data/models/response/gameName.dart';
 import 'package:steam_app/data/models/response/topgames.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
-
-final remoteApiProvider = Provider<RemoteAPISteam>((ref) => RemoteAPISteam());
 
 class RemoteAPISteam {
   //class remote api steam, tout les appeles vers steam sont ici

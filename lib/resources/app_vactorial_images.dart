@@ -3,6 +3,7 @@ part of 'resources.dart';
 class AppVactorialImages {
   AppVactorialImages._();
 
+  static const String bgPattern = 'assets/icon/Bg_Pattern.svg';
   static const String back = 'assets/icon/back.svg';
   static const String close = 'assets/icon/close.svg';
   static const String emptyLikes = 'assets/icon/empty_likes.svg';
